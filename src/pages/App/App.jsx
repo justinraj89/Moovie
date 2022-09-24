@@ -20,7 +20,7 @@ function App() {
     setUser(null);
   }
 
-  if (user) {
+  // if (user) {
 
     //IF USER IS LOGGED IN
     return (
@@ -39,19 +39,19 @@ function App() {
   }
 
   // IF USER IS NOT LOGGED IN
-    return (
-      <Routes>
-        <Route
-          path="/login"
-          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-        />
-        <Route
-          path="/signup"
-          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-        />
-        <Route path="/*" element={<Navigate to="/login" />} />
-      </Routes>
-    );
-  }
+  //   return (
+  //     <Routes>
+  //       <Route
+  //         path="/login"
+  //         element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+  //       />
+  //       <Route
+  //         path="/signup"
+  //         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+  //       />
+  //       <Route path="/*" element={<Navigate to="/login" />} />
+  //     </Routes>
+  //   );
+  // }
 
 export default App;

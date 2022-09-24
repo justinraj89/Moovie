@@ -10,28 +10,39 @@ import Form from 'react-bootstrap/Form';
 export default function LoginPage(props) {
   return (
     <>
-      <Navbar />
-      <Card className='formCard'>
-        <Card.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button variant="success" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-    </>
+    <Navbar />
+    <div className="form-container">
+    <form className="Auth-form">
+      <div className="Auth-form-content">
+        <h3 className="Auth-form-title">Log In</h3>
+        
+       
+        <div className="form-group mt-3">
+          <label>Email address</label>
+          <input
+            
+            className="form-control mt-1"
+            placeholder="Email Address"
+          />
+        </div>
+        <div className="form-group mt-3">
+          <label>Password</label>
+          <input
+            type="password"
+            className="form-control mt-1"
+            placeholder="Password"
+          />
+        </div>
+        
+        <div className="d-grid gap-2 mt-3">
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
+        </div>
+      
+      </div>
+    </form>
+  </div>
+  </>
   );
 }
