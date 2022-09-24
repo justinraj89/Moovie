@@ -2,18 +2,36 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
+import Navbar from "../../components/Navbar/Navbar";
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 export default function LoginPage(props) {
   return (
     <>
-      <h1>Setup Login Page</h1>
-      <ul>
-        <li>Read the Login Model, You can change it to fit your needs</li>
-        <li>
-          Make sure you read the Login Controller, to know how it is setup to
-          find the user!
-        </li>
-      </ul>
+      <Navbar />
+      <Card className='formCard'>
+        <Card.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Button variant="success" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </>
   );
 }
