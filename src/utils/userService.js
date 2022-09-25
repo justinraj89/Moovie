@@ -31,6 +31,8 @@ function signup(user) {
   //.then((token) => token.token);
 }
 
+
+
 function getUser() {
   return tokenService.getUserFromToken();
 }

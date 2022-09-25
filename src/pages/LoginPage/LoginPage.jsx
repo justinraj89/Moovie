@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
+import movieService from "../../utils/movieService";
 import Navbar from "../../components/Navbar/Navbar";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -37,6 +38,9 @@ export default function LoginPage({ handleSignUpOrLogin }) {
     e.preventDefault();
     try{
       await userService.login(state);
+      await movieService.createSession();
+      console.log("TMDB session ID", localStorage.getItem("tmdb_session_id"))
+
       handleSignUpOrLogin();
       navigate('/')
     }catch(err){

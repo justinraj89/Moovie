@@ -1,18 +1,36 @@
 import React from 'react';
 import './MovieSlider.css';
 
-export default function MovieSlider(){
+export default function MovieSlider(props){
+
+  let movieSliderItems = [];
+  let maxMovieItems = 15;
+  let movies = props.movies;
+
+  //========FUNCTIONS====================================
+
+  if (!!movies && movies.length > 0) {
+    movies = movies.slice(0,maxMovieItems);
+
+    for (let movie of movies) {
+      const imageSrcHost = "https://image.tmdb.org/t/p/w500/";
+      const movieImageSrc = `${imageSrcHost}${movie.poster_path}`
+      movieSliderItems.push(         
+           <div key={movie.id} className="item"><img className='movieThumbnail' src={movieImageSrc} /></div>
+
+       
+        )
+    }        
+}
+
+
 
 
 
     return (
       <>
         <div className="slidercontainer">
-          <div className="item"><img className='movieThumbnail' src="https://www.photomural.com/media/catalog/product/cache/2/thumbnail/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" /></div>
-          <div className="item"><img className='movieThumbnail' src="https://www.photomural.com/media/catalog/product/cache/2/thumbnail/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" /></div>
-          <div className="item"><img className='movieThumbnail' src="https://www.photomural.com/media/catalog/product/cache/2/thumbnail/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" /></div>
-          <div className="item"><img className='movieThumbnail' src="https://www.photomural.com/media/catalog/product/cache/2/thumbnail/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" /></div>
-          <div className="item"><img className='movieThumbnail' src="https://www.photomural.com/media/catalog/product/cache/2/thumbnail/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" /></div>
+          {movieSliderItems}
         </div>
 
       </>

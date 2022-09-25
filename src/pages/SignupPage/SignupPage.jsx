@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import './SignupPage.css'
 import userService from "../../utils/userService";
+import movieService from "../../utils/movieService";
 import { Navigate, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Card from 'react-bootstrap/Card';
@@ -52,6 +53,8 @@ export default function SignUpPage({ handleSignUpOrLogin}) {
 
     try{
       await userService.signup(state);
+      await movieService.createSession();
+      console.log("TMDB session ID", localStorage.getItem("tmdb_session_id"))
       handleSignUpOrLogin()
       navigate('/')
 

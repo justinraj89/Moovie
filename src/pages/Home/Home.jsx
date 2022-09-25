@@ -14,7 +14,7 @@ import TrendingMovies from '../../components/TrendingMovies/TrendingMovies'
 
 
 
-function App() {
+function Home() {
 
   const [movies, setMovies] = useState([]);
 
@@ -59,5 +59,5 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
 
