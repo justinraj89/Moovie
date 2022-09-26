@@ -1,63 +1,71 @@
-import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import './Home.css'
-import Navbar from '../../components/Navbar/Navbar'
-import Carousel from '../../components/Carousel/Carousel'
-import MovieSlider from '../../components/MovieSlider/MovieSlider';
+import React, { useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./Home.css";
+import Navbar from "../../components/Navbar/Navbar";
+import Carousel from "../../components/Carousel/Carousel";
+import MovieService from "../../utils/movieService";
+import Movie from "../../components/Movie/Movie";
+
+
 // import './App.css';
-import TrendingMovies from '../../components/TrendingMovies/TrendingMovies'
-
-
-
-
-
 
 function Home() {
-
   const [movies, setMovies] = useState([]);
 
+  //==========================================
+
+  useEffect(() => {
+    const fetchTrendingMovies = async () => {
+      const movies = await MovieService.fetchTrendingMovies();
+      // console.log(movies, "<-- from fetch trending movies");
+      setMovies(movies.results);
+    };
+    fetchTrendingMovies();
+  }, []);
+
+
+
+  //================================================
 
   return (
     <>
-    <Navbar />
-    <br />
-    <Container fluid="md">
-  
-      <Row>
-        <Col>
-          <Carousel />
-        </Col>
-      </Row>
+      <Navbar />
+      <br />
+      <Container fluid="md">
+        <Row>
+          <Col>
+            <Carousel />
+          </Col>
+        </Row>
 
-      <br/>
-      <br/>
-      <br/>
+        <br />
+        <br />
+        <br />
 
-      <Row>
-        <Col>
-          <h2>Looking for something to Watch?</h2>
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <h2>Looking for something to Watch?</h2>
+          </Col>
+        </Row>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Row>
+          <Col>
+            <h3>This weeks Trending Movies</h3>
+            <div className="movie-container">
+                {movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+            </div>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col>
-          <MovieSlider />
-        </Col>
-      </Row>
-        
-      <Row>
-        <Col>
-          <TrendingMovies />
-        </Col>
-      </Row>
 
-
-    </Container>
+      </Container>
     </>
   );
 }
 
 export default Home;
-

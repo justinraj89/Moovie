@@ -1,0 +1,15 @@
+.movieInfo {
+    color: white;
+    list-style: none;
+    font-size: 30px;
+}
+
+.detailsImg {
+    width: 500px;
+}
+
+.movieInfoTitles {
+    font-weight: 700;
+    font-size: 35px;
+    color: rgb(98, 98, 223);
+}
