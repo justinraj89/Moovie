@@ -7,11 +7,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Carousel from "../../components/Carousel/Carousel";
 import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 
 function Home() {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
   //==========================================
 
@@ -19,6 +21,7 @@ function Home() {
     const fetchTrendingMovies = async () => {
       const movies = await MovieService.fetchTrendingMovies();
       // console.log(movies, "<-- from fetch trending movies");
+      setLoading(() => false)
       setMovies(movies.results);
     };
     fetchTrendingMovies();
@@ -45,6 +48,12 @@ function Home() {
 
 
   //================================================
+
+  if(loading) {
+    return(
+      <LoadingSpinner />
+    )
+  }
 
   return (
     <>

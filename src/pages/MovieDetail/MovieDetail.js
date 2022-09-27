@@ -8,9 +8,11 @@ import MovieService from "../../utils/movieService";
 import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState("");
+  const [loading, setLoading] = useState(true)
 
   const TMDBImgUrl = "https://image.tmdb.org/t/p/w1280";
 
@@ -19,8 +21,8 @@ const MovieDetails = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const movieDetail = await MovieService.getMovieDetails(id);
+      setLoading(false)
       console.log(movieDetail, "<---MOVIE DETAILS");
-      console.log(movieDetail.genres[0].name)
       setMovie(movieDetail);
     };
     fetchMovieDetails();
