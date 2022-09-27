@@ -9,10 +9,9 @@ import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 
 
-
-
 function Home() {
   const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState('')
 
   //==========================================
 
@@ -25,6 +24,24 @@ function Home() {
     fetchTrendingMovies();
   }, []);
 
+
+  // const fetchSearchMovie = async (query) => {
+  //   const searchResults = await MovieService.movieSearch(query)
+  //   console.log(searchResults)
+  // }
+
+  //===================================================
+
+
+  const handleSubmit =  (e) => {
+    e.preventDefault();
+    
+    
+  }
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  };
 
 
   //================================================
@@ -47,22 +64,44 @@ function Home() {
         <Row>
           <Col>
             <h2>Looking for something to Watch?</h2>
+
+            <div className="searchform-container">
+              <form onSubmit={handleSubmit} className="searchAuth-form">
+                <div className="Auth-form-content">
+                  <div className="form-group mt-3">
+                    <input
+                      name="search"
+                      value={search}
+                      onChange={handleChange}
+                      className="form-control mt-1"
+                      placeholder="Search Movie Title"
+                      required
+                    />
+                  </div>
+
+                  <div className="d-grid gap-2 mt-3">
+                    <button type="submit" className="btn btn-secondary">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </Col>
         </Row>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
         <Row>
           <Col>
             <h3>Todays Top Picks</h3>
             <div className="movie-container">
-                {movies.length > 0 && movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+              {movies.length > 0 &&
+                movies.map((movie) => <Movie key={movie.id} {...movie} />)}
             </div>
           </Col>
         </Row>
-
-
       </Container>
     </>
   );

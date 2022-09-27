@@ -1,11 +1,29 @@
 
-// https://developers.themoviedb.org/3/authentication/create-session
-// const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_SECRET}&query=`;
 const BASE_URL = '/api/movies/';
 
 
-const movieSearch = async (searchTerms) => {
-    const url = `/api/movies/search?query=${searchTerms}`;
+
+
+const fetchTrendingMovies = async () => {
+    const url = `/api/movies/trending`;
+    try{
+        const response = await fetch(url);
+        if(response.ok){
+            const trendingMovieData = await response.json()
+            //console.log(trendingMovieData.results)
+            return trendingMovieData;
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+//===================================================================================
+
+const movieSearch = async (search) => {
+    console.log('search hits front end')
+    const url = `/api/movies/search?query=${search}`;
     try{
         const response = await fetch(url)
         if(response.ok){
@@ -18,7 +36,19 @@ const movieSearch = async (searchTerms) => {
     }
 }
 
-
+// const movieSearch = async () => {
+//     const url = `/api/movies/search`;
+//     try{
+//         const response = await fetch(url)
+//         if(response.ok){
+//             const movieQuery = await response.json()
+//             return movieQuery;
+//         }
+//     }
+//     catch(err){
+//         console.log(err)
+//     }
+// }
 
 //===============================================================================
 
@@ -36,23 +66,6 @@ const createSession = async () => {
         if(response.ok){
             const json = await response.json()
             localStorage.setItem('tmdb_session_id', json.guest_session_id);
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-//===================================================================================
-
-const fetchTrendingMovies = async () => {
-    const url = `/api/movies/trending`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const trendingMovieData = await response.json()
-            //console.log(trendingMovieData.results)
-            return trendingMovieData;
         }
     }
     catch(err){
@@ -79,43 +92,7 @@ const getMovieDetails = async (movieId) => {
     }
 }
 
-//===============================================================================================
-
-
-const getMoviePosters = async (movieId) => {
-    const url = `/api/movies/posters?id=${movieId}`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const images = await response.json()
-            console.log(images.posters)
-            return images.posters;
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-//==============================================================================================
-
-
-const getMovieBackdrops = async (movieId) => {
-    const url = `/api/movies/backdrops?id=${movieId}`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const images = await response.json()
-            console.log(images.backdrops)
-            return images.backdrops;
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-//==============================================================================================
+//==============================================================================
 
 const getMovieReviews = async (movieId) => {
     const url = `/api/movies/reviews?id=${movieId}`;
@@ -181,6 +158,45 @@ const deleteMovieRating = async (movieId) => {
     }
 }
 
+
+//===============================================================================================
+
+
+// const getMoviePosters = async (movieId) => {
+//     const url = `/api/movies/posters?id=${movieId}`;
+//     try{
+//         const response = await fetch(url);
+//         if(response.ok){
+//             const images = await response.json()
+//             console.log(images.posters)
+//             return images.posters;
+//         }
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
+
+// //==============================================================================================
+
+
+// const getMovieBackdrops = async (movieId) => {
+//     const url = `/api/movies/backdrops?id=${movieId}`;
+//     try{
+//         const response = await fetch(url);
+//         if(response.ok){
+//             const images = await response.json()
+//             console.log(images.backdrops)
+//             return images.backdrops;
+//         }
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
+
+// //==============================================================================================
+
 //========================================================================================================
 
 
@@ -188,10 +204,10 @@ export default {
     createSession,
     fetchTrendingMovies,
     getMovieDetails,
-    getMoviePosters,
-    getMovieBackdrops,
     getMovieReviews,
     rateMovie,
     deleteMovieRating,
-    movieSearch
+    movieSearch,
+    // getMoviePosters,
+    // getMovieBackdrops,
 }

@@ -1,211 +1,183 @@
-
 // https://developers.themoviedb.org/3/authentication/create-session
 // const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_SECRET}&query=`;
 const apiUrlPrefix = "https://api.themoviedb.org/3";
 const apiKey = "todo";
 
 
+
+const fetchTrendingMovies = async (req, res) => {
+  const url = `${apiUrlPrefix}/trending/movie/day?api_key=d8794e2b80155359a43de192193b132f`;
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const trendingMovieData = await response.json();
+      res.status(200).json(trendingMovieData);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//====================================================================================
+
 const movieSearch = async (req, res) => {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=d8794e2b80155359a43de192193b132f&query=`;
-    try{
-        const response = await fetch(url)
-        if(response.ok){
-            const movieQuery = await response.json()
-            return movieQuery;
-        }
+    console.log('search hits backend')
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=d8794e2b80155359a43de192193b132f&query=`;
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const movieQuery = await response.json();
+      res.status(200).json(movieQuery)
     }
-    catch(err){
-        console.log(err)
-    }
-}
-
-
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //===============================================================================
 
 const createSession = async (req, res) => {
-    const url = `${apiUrlPrefix}/authentication/guest_session/new?api_key=d8794e2b80155359a43de192193b132f`;
-    try{
-        /*
-        const response = await fetch(url,{
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            cache: 'no-cache', // *default, no-cache, reload, force-cache,);
-        })        
-        */
-        const response = await fetch(url)
-
-        if(response.ok){
-            const json = await response.json()
-            localStorage.setItem('tmdb_session_id', json.guest_session_id);
-        }
+  const url = `${apiUrlPrefix}/authentication/guest_session/new?api_key=d8794e2b80155359a43de192193b132f`;
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const json = await response.json();
+      res.status(200).json(json)
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //===================================================================================
 
-const fetchTrendingMovies = async (req, res) => {
-    const url = `${apiUrlPrefix}/trending/movie/day?api_key=d8794e2b80155359a43de192193b132f`
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const trendingMovieData = await response.json()
-            //console.log(trendingMovieData.results)
-            res
-            .status(200)
-            .json(trendingMovieData);
-        }
-    }
-    catch(err){
-        console.log(err);
-    }    
-}
-
-//====================================================================================
-
-
 const getMovieDetails = async (req, res) => {
-    let movieId = req.query.id;
-    const url = `${apiUrlPrefix}/movie/${movieId}?api_key=d8794e2b80155359a43de192193b132f`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const detailsData = await response.json()
-            console.log(detailsData)
-            // error handler goes here
-            res
-            .status(200)
-            .json(detailsData);
-        }
+  let movieId = req.query.id;
+  const url = `${apiUrlPrefix}/movie/${movieId}?api_key=d8794e2b80155359a43de192193b132f`;
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const detailsData = await response.json();
+      console.log(detailsData);
+      // error handler goes here
+      res.status(200).json(detailsData);
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //===============================================================================================
 
-
-const getMoviePosters = async (req, res) => {
-    let movieId = req.query.id;
-    const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const images = await response.json()
-            console.log(images.posters)
-            res
-            .status(200)
-            .json(images.posters);        }
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-//==============================================================================================
-
-
-const getMovieBackdrops = async (req, res) => {
-    let movieId = req.query.id;
-    const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const images = await response.json()
-            console.log(images.backdrops)
-            res
-            .status(200)
-            .json(images.backdrops);        }
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-//==============================================================================================
-
 const getMovieReviews = async (req, res) => {
-    let movieId = req.query.id;
-    const url = `${apiUrlPrefix}/movie/${movieId}/reviews?api_key=d8794e2b80155359a43de192193b132f`;
-    try{
-        const response = await fetch(url);
-        if(response.ok){
-            const reviewsData = await response.json()
-            // reviewsData can have multiple pages of data
-            // reviewsData.results contains the review data
-            console.log(reviewsData)
-            res
-            .status(200)
-            .json(reviewsData);        }
+  let movieId = req.query.id;
+  const url = `${apiUrlPrefix}/movie/${movieId}/reviews?api_key=d8794e2b80155359a43de192193b132f`;
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const reviewsData = await response.json();
+      // reviewsData can have multiple pages of data
+      // reviewsData.results contains the review data
+      console.log(reviewsData);
+      res.status(200).json(reviewsData);
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //======================================================================================================
 
 const rateMovie = async (req, res) => {
-    let movieId = req.query.id;
-    let rating = req.query.rating;
-    const guestSessionId = localStorage.getItem("tmdb_session_id")
-    const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
-    try{
-        const data = { value: Number.parseInt(rating)}
-        const response = await fetch(url,{
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            cache: 'no-cache', // *default, no-cache, reload, force-cache,);
-            body: JSON.stringify(req.body)
-        })        
+  let movieId = req.query.id;
+  let rating = req.query.rating;
+  const guestSessionId = localStorage.getItem("tmdb_session_id");
+  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
+  try {
+    const data = { value: Number.parseInt(rating) };
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache,);
+      body: JSON.stringify(req.body),
+    });
 
-        if(response.ok){
-            const json = await response.json()
-            localStorage.setItem('tmdb_session_id', json.guest_session_id);
-        }
+    if (response.ok) {
+      const json = await response.json();
+      localStorage.setItem("tmdb_session_id", json.guest_session_id);
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //=======================================================================================================
 
 const deleteMovieRating = async (req, res) => {
-    let movieId = req.query.id;
-    const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
-    const guestSessionId = localStorage.getItem("tmdb_session_id")
+  let movieId = req.query.id;
+  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
+  const guestSessionId = localStorage.getItem("tmdb_session_id");
 
-    try{
-        const data = { }
-        const response = await fetch(url,{
-            method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-            cache: 'no-cache', // *default, no-cache, reload, force-cache,);
-            body: JSON.stringify(req.body)
-        })        
+  try {
+    const data = {};
+    const response = await fetch(url, {
+      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache,);
+      body: JSON.stringify(req.body),
+    });
 
-        if(response.ok){
-            const json = await response.json()
-            localStorage.setItem('tmdb_session_id', json.guest_session_id);
-        }
+    if (response.ok) {
+      const json = await response.json();
+      localStorage.setItem("tmdb_session_id", json.guest_session_id);
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//============================================================================================================
+
+// const getMoviePosters = async (req, res) => {
+//   let movieId = req.query.id;
+//   const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
+//   try {
+//     const response = await fetch(url);
+//     if (response.ok) {
+//       const images = await response.json();
+//       console.log(images.posters);
+//       res.status(200).json(images.posters);
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// //==============================================================================================
+
+// const getMovieBackdrops = async (req, res) => {
+//   let movieId = req.query.id;
+//   const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
+//   try {
+//     const response = await fetch(url);
+//     if (response.ok) {
+//       const images = await response.json();
+//       console.log(images.backdrops);
+//       res.status(200).json(images.backdrops);
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 //========================================================================================================
 
 module.exports = {
-    createSession,
-    fetchTrendingMovies,
-    getMovieDetails,
-    getMoviePosters,
-    getMovieBackdrops,
-    getMovieReviews,
-    rateMovie,
-    deleteMovieRating,
-    movieSearch
-}
+  createSession,
+  fetchTrendingMovies,
+  getMovieDetails,
+  getMovieReviews,
+  rateMovie,
+  deleteMovieRating,
+  movieSearch,
+//   getMoviePosters,
+//   getMovieBackdrops,
+};

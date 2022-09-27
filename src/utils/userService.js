@@ -2,6 +2,21 @@ import tokenService from './tokenService';
 
 const BASE_URL = '/api/users/';
 
+//============================================================
+
+function getProfile(username){
+  return fetch(BASE_URL + username, {
+    headers: {
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    }
+  })
+  .then(res => {
+    if(res.ok) return res.json();
+    throw new Error('Bad Credentials!')
+  })
+}
+
+//============================================================
 
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
@@ -30,15 +45,19 @@ function signup(user) {
   //.then((token) => token.token);
 }
 
-
+//============================================================
 
 function getUser() {
   return tokenService.getUserFromToken();
 }
 
+//============================================================
+
 function logout() {
   tokenService.removeToken();
 }
+
+//============================================================
 
 function login(creds) {
   return fetch(BASE_URL + 'login', {
@@ -57,10 +76,13 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
+//============================================================
+
 
 export default {
   signup, 
   logout,
   login,
-  getUser
+  getUser,
+  getProfile
 };
