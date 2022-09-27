@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Watchlist = require('../models/watchlist')
 const jwt = require('jsonwebtoken');
 
 const SECRET = process.env.SECRET
