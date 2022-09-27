@@ -3,7 +3,6 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 
-
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
     method: 'POST',

@@ -55,8 +55,6 @@ const MovieDetails = () => {
                 {movie.release_date}
               </li>
               <br/>
-            
-              
               <Button variant="secondary">Add to your Watchlist</Button>{' '}
             </ul>
             

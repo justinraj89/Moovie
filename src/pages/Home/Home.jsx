@@ -9,7 +9,7 @@ import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 
 
-// import './App.css';
+
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -55,9 +55,9 @@ function Home() {
         <br/>
         <Row>
           <Col>
-            <h3>This weeks Trending Movies</h3>
+            <h3>Todays Top Picks</h3>
             <div className="movie-container">
-                {movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+                {movies.length > 0 && movies.map((movie) => <Movie key={movie.id} {...movie} />)}
             </div>
           </Col>
         </Row>
