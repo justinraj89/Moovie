@@ -2,7 +2,10 @@ import React from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import './Carousel.css'
 
-export default function homeSwipe() {
+
+export default function HomeSwipe() {
+
+
     return (
 
 

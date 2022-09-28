@@ -52,6 +52,7 @@ const movieSearch = async (search) => {
 
 //===============================================================================
 
+
 const createSession = async () => {
     const url = `/api/movies/session`;
     try{

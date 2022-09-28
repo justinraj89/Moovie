@@ -22,12 +22,12 @@ function App() {
     setUser(null);
   }
 
-  // if (user) {
+  if (user) {
 
   //IF USER IS LOGGED IN
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home handleLogout={handleLogout} user={user}/>} />
       <Route
         path="/login"
         element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
@@ -39,26 +39,27 @@ function App() {
 
       <Route path="/movie-details/:id" element={<MovieDetail />} />
 
-      <Route path="/:username" element={<ProfilePage />} />
+      <Route path="/:username" element={<ProfilePage user={user} />} />
 
     </Routes>
   );
 }
 
-// IF USER IS NOT LOGGED IN
-//   return (
-//     <Routes>
-//       <Route
-//         path="/login"
-//         element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-//       />
-//       <Route
-//         path="/signup"
-//         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-//       />
-//       <Route path="/*" element={<Navigate to="/login" />} />
-//     </Routes>
-//   );
-// }
+// // IF USER IS NOT LOGGED IN
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/login"
+        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route
+        path="/signup"
+        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route path="/*" element={<Navigate to="/login" />} />
+    </Routes>
+  );
+  }
 
 export default App;

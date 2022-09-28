@@ -1,13 +1,14 @@
-import Spinner from 'react-bootstrap/Spinner';
-import './LoadingSpinner.css'
+import Spinner from "react-bootstrap/Spinner";
+import "./LoadingSpinner.css";
 
-function LoadingSpinner () {
+function LoadingSpinner() {
   return (
     <>
+      <div className="spinnerContainer">
         <Spinner className="spinner" animation="border" variant="info" />
-        <div className="loadingprompt">Loading.. Please Wait</div>
-    </>  
-      
+      </div>
+      <div className="loadingprompt">Loading.. Please Wait</div>
+    </>
   );
 }
 

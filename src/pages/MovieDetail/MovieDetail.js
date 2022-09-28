@@ -18,6 +18,8 @@ const MovieDetails = () => {
 
   const { id } = useParams();
 
+  //==============================================================================
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const movieDetail = await MovieService.getMovieDetails(id);
@@ -27,6 +29,15 @@ const MovieDetails = () => {
     };
     fetchMovieDetails();
   }, []);
+
+  //=================================================================================
+
+
+  if(loading) {
+    return(
+      <LoadingSpinner />
+    )
+  }
 
   return (
     <>

@@ -1,12 +1,12 @@
 // https://developers.themoviedb.org/3/authentication/create-session
 // const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_SECRET}&query=`;
 const apiUrlPrefix = "https://api.themoviedb.org/3";
-const apiKey = "todo";
+const apiKey = process.env.APIKEY
 
 
 
 const fetchTrendingMovies = async (req, res) => {
-  const url = `${apiUrlPrefix}/trending/movie/day?api_key=d8794e2b80155359a43de192193b132f`;
+  const url = `${apiUrlPrefix}/trending/movie/day?api_key=${apiKey}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -22,7 +22,7 @@ const fetchTrendingMovies = async (req, res) => {
 
 const movieSearch = async (req, res) => {
     console.log('search hits backend')
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=d8794e2b80155359a43de192193b132f&query=`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -37,7 +37,7 @@ const movieSearch = async (req, res) => {
 //===============================================================================
 
 const createSession = async (req, res) => {
-  const url = `${apiUrlPrefix}/authentication/guest_session/new?api_key=d8794e2b80155359a43de192193b132f`;
+  const url = `${apiUrlPrefix}/authentication/guest_session/new?api_key=${apiKey}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -53,7 +53,7 @@ const createSession = async (req, res) => {
 
 const getMovieDetails = async (req, res) => {
   let movieId = req.query.id;
-  const url = `${apiUrlPrefix}/movie/${movieId}?api_key=d8794e2b80155359a43de192193b132f`;
+  const url = `${apiUrlPrefix}/movie/${movieId}?api_key=${apiKey}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -71,7 +71,7 @@ const getMovieDetails = async (req, res) => {
 
 const getMovieReviews = async (req, res) => {
   let movieId = req.query.id;
-  const url = `${apiUrlPrefix}/movie/${movieId}/reviews?api_key=d8794e2b80155359a43de192193b132f`;
+  const url = `${apiUrlPrefix}/movie/${movieId}/reviews?api_key=${apiKey}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -92,7 +92,7 @@ const rateMovie = async (req, res) => {
   let movieId = req.query.id;
   let rating = req.query.rating;
   const guestSessionId = localStorage.getItem("tmdb_session_id");
-  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
+  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=${apiKey}&guest_session_id=${guestSessionId}`;
   try {
     const data = { value: Number.parseInt(rating) };
     const response = await fetch(url, {
@@ -114,7 +114,7 @@ const rateMovie = async (req, res) => {
 
 const deleteMovieRating = async (req, res) => {
   let movieId = req.query.id;
-  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=d8794e2b80155359a43de192193b132f&guest_session_id=${guestSessionId}`;
+  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=${apiKey}&guest_session_id=${guestSessionId}`;
   const guestSessionId = localStorage.getItem("tmdb_session_id");
 
   try {

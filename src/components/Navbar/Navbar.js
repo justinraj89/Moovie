@@ -5,7 +5,49 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {LinkContainer} from 'react-router-bootstrap'
 
-const Header = () => {
+const Header = ({ user, handleLogout }) => {
+
+  if (user) {
+    return(
+      <>
+      <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">
+        <Container>
+          <LinkContainer to='/'>
+            <Navbar.Brand href="#home">
+              <img
+                alt=""
+                src="https://i.imgur.com/VTrwaJv.png"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />{" "}
+              Movie
+            </Navbar.Brand>
+          </LinkContainer>
+         
+
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+            </Nav>
+            <Nav>
+              <LinkContainer to={`/${user?.username}`}>
+                <Nav.Link>{user.username}'s Watchlist</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='' onClick={handleLogout}>
+                <Nav.Link>Log Out</Nav.Link>
+              </LinkContainer>
+      
+              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+      
+      
+    )
+  }
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">

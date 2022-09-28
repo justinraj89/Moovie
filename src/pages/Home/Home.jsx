@@ -9,10 +9,9 @@ import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
-
-function Home() {
+function Home({ user, handleLogout }) {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   //==========================================
@@ -21,48 +20,65 @@ function Home() {
     const fetchTrendingMovies = async () => {
       const movies = await MovieService.fetchTrendingMovies();
       // console.log(movies, "<-- from fetch trending movies");
-      setLoading(() => false)
+      setLoading(() => false);
       setMovies(movies.results);
     };
     fetchTrendingMovies();
   }, []);
 
-
-  // const fetchSearchMovie = async (query) => {
-  //   const searchResults = await MovieService.movieSearch(query)
-  //   console.log(searchResults)
-  // }
-
   //===================================================
 
 
-  const handleSubmit =  (e) => {
+  
+
+  //===========*************** THIS NEEDS TO BE RE CONFIGURED TO GET CALLED FROM BACKEND
+
+  const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=d8794e2b80155359a43de192193b132f&query=`;
+
+  const getMovies = (API) => {
+    fetch(API)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.results);
+      });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    
-  }
+    if (search) {
+      getMovies(SEARCH_API + search);
+      setSearch("");
+    }
+  };
 
   const handleChange = (e) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value);
   };
+
+  //*********************************************************************************************** */
+
+
 
 
   //================================================
 
-  if(loading) {
-    return(
-      <LoadingSpinner />
-    )
+  if (loading) {
+    return (
+      <>
+        <Navbar handleLogout={handleLogout} user={user} />
+        <LoadingSpinner />
+      </>
+    );
   }
 
   return (
     <>
-      <Navbar />
+      <Navbar handleLogout= {handleLogout} user={user}/>
       <br />
       <Container fluid="md">
         <Row>
           <Col>
-            <Carousel />
+            <Carousel movies={movies}/>
           </Col>
         </Row>
 
@@ -104,7 +120,6 @@ function Home() {
         <br />
         <Row>
           <Col>
-            <h3>Todays Top Picks</h3>
             <div className="movie-container">
               {movies.length > 0 &&
                 movies.map((movie) => <Movie key={movie.id} {...movie} />)}
