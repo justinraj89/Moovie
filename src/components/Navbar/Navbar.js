@@ -34,7 +34,7 @@ const Header = ({ user, handleLogout }) => {
               <LinkContainer to={`/${user?.username}`}>
                 <Nav.Link>{user.username}'s Watchlist</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='' onClick={handleLogout}>
+              <LinkContainer to='/' onClick={handleLogout}>
                 <Nav.Link>Log Out</Nav.Link>
               </LinkContainer>
       

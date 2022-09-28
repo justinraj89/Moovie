@@ -7,6 +7,7 @@ function LoadingSpinner() {
       <div className="spinnerContainer">
         <Spinner className="spinner" animation="border" variant="info" />
       </div>
+      <br/>
       <div className="loadingprompt">Loading.. Please Wait</div>
     </>
   );

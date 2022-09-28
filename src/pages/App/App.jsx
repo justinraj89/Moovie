@@ -37,9 +37,9 @@ function App() {
         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
 
-      <Route path="/movie-details/:id" element={<MovieDetail user={user} />} />
+      <Route path="/movie-details/:id" element={<MovieDetail handleLogout={handleLogout} user={user} />} />
 
-      <Route path="/:username" element={<ProfilePage user={user} />} />
+      <Route path="/:username" element={<ProfilePage handleLogout={handleLogout} user={user} />} />
 
     </Routes>
   );

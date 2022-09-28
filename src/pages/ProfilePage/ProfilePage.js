@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 //================================================================
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ user, handleLogout }) {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [profileUser, setProfileUser] = useState({});
 
@@ -38,7 +38,7 @@ export default function ProfilePage({ user }) {
 
   return (
     <>
-      <Navbar user={user}/>
+      <Navbar handleLogout={handleLogout} user={user}/>
       <br />
       <Container fluid="md">
         <Row>
