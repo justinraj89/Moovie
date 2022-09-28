@@ -37,7 +37,7 @@ function App() {
         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
 
-      <Route path="/movie-details/:id" element={<MovieDetail />} />
+      <Route path="/movie-details/:id" element={<MovieDetail user={user} />} />
 
       <Route path="/:username" element={<ProfilePage user={user} />} />
 

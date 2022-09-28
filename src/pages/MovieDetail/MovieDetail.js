@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
-const MovieDetails = () => {
+const MovieDetails = ({ user }) => {
   const [movie, setMovie] = useState("");
   const [loading, setLoading] = useState(true)
 
@@ -33,15 +33,18 @@ const MovieDetails = () => {
   //=================================================================================
 
 
-  if(loading) {
-    return(
-      <LoadingSpinner />
-    )
+  if (loading) {
+    return (
+      <>
+        <Navbar  user={user} />
+        <LoadingSpinner />
+      </>
+    );
   }
 
   return (
     <>
-      <Navbar />
+      <Navbar user={user}/>
       <Container>
         <br/>
         <br/>

@@ -12,9 +12,9 @@ import { useParams } from "react-router-dom";
 
 //================================================================
 
-export default function ProfilePage() {
+export default function ProfilePage({ user }) {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
-  const [user, setUser] = useState({});
+  const [profileUser, setProfileUser] = useState({});
 
 
   const { username } = useParams();
@@ -26,26 +26,26 @@ export default function ProfilePage() {
       try {
         const data = await userService.getProfile(username);
         console.log(data, "<---DATA");
-        setUser(() => data.user);
+        setProfileUser(() => data.user);
         // setWatchlistMovies(() => [...data.watchlistMovies])
       } catch (err) {
         console.log(err);
       }
     }
     getProfile();
-  }, []);
+  }, [username]);
 
 
   return (
     <>
-      <Navbar />
+      <Navbar user={user}/>
       <br />
       <Container fluid="md">
         <Row>
           <Col>
             <br />
             <br />
-            <h1 className="username">Hello </h1>
+            <h1 className="username">Hello {user.username} </h1>
           </Col>
         </Row>
       </Container>
