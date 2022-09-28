@@ -28,25 +28,16 @@ function Home({ user, handleLogout }) {
 
   //===================================================
 
-
-  
-
-  //===========*************** THIS NEEDS TO BE RE CONFIGURED TO GET CALLED FROM BACKEND
-
-  const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=d8794e2b80155359a43de192193b132f&query=`;
-
-  const getMovies = (API) => {
-    fetch(API)
-      .then((res) => res.json())
-      .then((data) => {
-        setMovies(data.results);
-      });
-  };
+  const fetchSearchMovies = async (query) => {
+    const queryMovies = await MovieService.movieSearch(query);
+    console.log(queryMovies)
+    setMovies(queryMovies.results)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (search) {
-      getMovies(SEARCH_API + search);
+      fetchSearchMovies(search)
       setSearch("");
     }
   };
@@ -54,10 +45,6 @@ function Home({ user, handleLogout }) {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-
-  //*********************************************************************************************** */
-
-
 
 
   //================================================

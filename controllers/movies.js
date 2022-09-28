@@ -1,5 +1,4 @@
 // https://developers.themoviedb.org/3/authentication/create-session
-// const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_SECRET}&query=`;
 const apiUrlPrefix = "https://api.themoviedb.org/3";
 const apiKey = process.env.APIKEY
 
@@ -21,8 +20,8 @@ const fetchTrendingMovies = async (req, res) => {
 //====================================================================================
 
 const movieSearch = async (req, res) => {
-    console.log('search hits backend')
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
+  const search = req.query.query
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -33,6 +32,7 @@ const movieSearch = async (req, res) => {
     console.log(err);
   }
 };
+
 
 //===============================================================================
 
