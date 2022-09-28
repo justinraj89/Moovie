@@ -3,8 +3,15 @@ import Carousel from 'react-bootstrap/Carousel';
 import './Carousel.css'
 
 
-export default function HomeSwipe() {
+export default function movieCarousel({ movies }) {
 
+    console.log(movies)
+
+    const TMDBImgUrl = "https://image.tmdb.org/t/p/w1280";
+
+    const carouselImgOne = movies[5].backdrop_path;
+    const carouselImgTwo = movies[10].backdrop_path;
+    const carouselImgThree = movies[15].backdrop_path;
 
     return (
 

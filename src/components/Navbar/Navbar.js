@@ -10,7 +10,7 @@ const Header = ({ user, handleLogout }) => {
   if (user) {
     return(
       <>
-      <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">
+      <Navbar sticky='top' collapseOnSelect expand="lg" bg="black" variant="dark">
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand href="#home">
@@ -50,7 +50,7 @@ const Header = ({ user, handleLogout }) => {
   }
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">
+      <Navbar sticky='top' collapseOnSelect expand="lg" bg="black" variant="dark">
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand href="#home">
