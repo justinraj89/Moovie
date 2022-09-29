@@ -84,10 +84,11 @@ export default function ProfilePage({ user, handleLogout }) {
           <Col>
             <br />
             <br />
-            <h1 className="username">Hello {profileUser.username} </h1>
+            <h1 className="username">{profileUser.username}'s Watchlist </h1>
           </Col>
         </Row>
-
+        <br/>
+        <br/>
         <Row>
           <Col>
             <div className="movie-container">
