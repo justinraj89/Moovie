@@ -16,12 +16,12 @@ const Header = ({ user, handleLogout }) => {
             <Navbar.Brand href="#home">
               <img
                 alt=""
-                src="https://i.imgur.com/VTrwaJv.png"
-                width="30"
-                height="30"
+                src="https://i.imgur.com/eNExTFg.png"
+                width="50"
+                height="50"
                 className="d-inline-block align-top"
               />{" "}
-              Movie
+              Moovie
             </Navbar.Brand>
           </LinkContainer>
          
