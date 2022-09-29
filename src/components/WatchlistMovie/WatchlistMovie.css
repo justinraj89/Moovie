@@ -1,0 +1,16 @@
+.removeOverlay {
+	position: absolute;
+	color: white;
+	background: rgba(230, 50, 50, 1);
+	width: 100%;
+	transition: 0.5s ease;
+	opacity: 0;
+	bottom: 0;
+	font-size: 20px;
+	padding: 20px;
+	text-align: center;
+}
+
+.image-container:hover .removeOverlay {
+	opacity: 1;
+}
