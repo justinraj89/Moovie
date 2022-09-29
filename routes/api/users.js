@@ -6,6 +6,7 @@ const usersCtrl = require('../../controllers/users');
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 router.get('/watchlist', usersCtrl.addMovieToWatchlist);
+router.delete('/watchlist', usersCtrl.removeMovieFromWatchlist);
 router.get('/:username', usersCtrl.profile);
 
 /*---------- Protected Routes ----------*/

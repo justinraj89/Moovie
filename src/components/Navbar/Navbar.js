@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {LinkContainer} from 'react-router-bootstrap'
+import './Navbar.css'
 
 const Header = ({ user, handleLogout }) => {
 
@@ -13,12 +14,12 @@ const Header = ({ user, handleLogout }) => {
       <Navbar sticky='top' collapseOnSelect expand="lg" bg="black" variant="dark">
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand className='logoFont' href="#home">
               <img
                 alt=""
                 src="https://i.imgur.com/eNExTFg.png"
-                width="50"
-                height="50"
+                width="60"
+                height="60"
                 className="d-inline-block align-top"
               />{" "}
               Moovie
@@ -32,10 +33,10 @@ const Header = ({ user, handleLogout }) => {
             </Nav>
             <Nav>
               <LinkContainer to={`/${user?.username}`}>
-                <Nav.Link>{user.username}'s Watchlist</Nav.Link>
+                <Nav.Link className="navLinks">{user.username}'s Watchlist</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/' onClick={handleLogout}>
-                <Nav.Link>Log Out</Nav.Link>
+                <Nav.Link className="navLinks">Log Out</Nav.Link>
               </LinkContainer>
       
               
@@ -53,15 +54,15 @@ const Header = ({ user, handleLogout }) => {
       <Navbar sticky='top' collapseOnSelect expand="lg" bg="black" variant="dark">
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand className='logoFont' href="#home">
               <img
                 alt=""
-                src="https://i.imgur.com/VTrwaJv.png"
-                width="30"
-                height="30"
+                src="https://i.imgur.com/eNExTFg.png"
+                width="60"
+                height="60"
                 className="d-inline-block align-top"
               />{" "}
-              Movie
+              Moovie
             </Navbar.Brand>
           </LinkContainer>
          
@@ -86,10 +87,10 @@ const Header = ({ user, handleLogout }) => {
             </Nav>
             <Nav>
               <LinkContainer to='/login'>
-                <Nav.Link>Login</Nav.Link>
+                <Nav.Link className="navLinks">Login</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/signup'>
-                <Nav.Link eventKey={2}>Sign Up</Nav.Link>
+                <Nav.Link className="navLinks">Sign Up</Nav.Link>
               </LinkContainer>
               
             </Nav>

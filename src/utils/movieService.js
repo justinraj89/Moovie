@@ -167,19 +167,34 @@ function addToWatchlist(movieInfo) {
 }
 
 
-function addToWatchlistPOST(movieInfo) {
+// function addToWatchlistPOST(movieInfo) {
 
-  return fetch(`/api/users/watchlist`, {
-    method: "POST",
-    body: JSON.stringify(movieInfo),
+//   return fetch(`/api/users/watchlist`, {
+//     method: "POST",
+//     body: JSON.stringify(movieInfo),
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: "Bearer " + tokenService.getToken(), // This grabs thee JWT token out
+//       // local storage and send its in the header to the server
+//     },
+//   }).then((res) => {
+//     if (res.ok) return res.json();
+//     throw new Error(res.error);
+//   });
+// }
+
+//==========================REMOVE FROM WATCHLIST==============================================
+
+function removeMovieFromWatchlist(movieInfo) {
+
+  return fetch(`/api/users/watchlist/?id=${movieInfo.movieId}&title=${movieInfo.movieTitle}&img=${movieInfo.movieImg}`, {
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + tokenService.getToken(), // This grabs thee JWT token out
-      // local storage and send its in the header to the server
-    },
+      Authorization: "Bearer " + tokenService.getToken(),
+    }
   }).then((res) => {
-    if (res.ok) return res.json();
-    throw new Error(res.error);
+    if(res.ok) return res.json();
+    throw new Error (res.error)
   });
 }
 
@@ -195,5 +210,6 @@ export default {
   deleteMovieRating,
   movieSearch,
   addToWatchlist,
-  fetchPopularMovies
+  fetchPopularMovies,
+  removeMovieFromWatchlist
 };

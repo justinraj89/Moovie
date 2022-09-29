@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const Watchlist = require("../models/watchlist");
 const jwt = require("jsonwebtoken");
-
 const SECRET = process.env.SECRET;
 
 module.exports = {
@@ -9,6 +8,7 @@ module.exports = {
   login,
   profile,
   addMovieToWatchlist,
+  removeMovieFromWatchlist
 };
 
 //=============================================================
@@ -67,7 +67,7 @@ async function login(req, res) {
 async function profile(req, res) {
   try {
     // const user = await User.findOne({ email: req.user.email });
-    const user = await User.findOne({ username: req.params.username })
+    const user = await User.findOne({ username: req.params.username });
     if (!user) return res.status(404).json({ error: "User not found" });
     const watchlistMovies = await Watchlist.find({ user: user._id })
       .populate("user")
@@ -111,7 +111,6 @@ async function addMovieToWatchlist(req, res) {
     }
 
     let watch = { user: user, ...movieInfo };
-    console.log("watch", watch);
     watchlistMovie = new Watchlist(watch);
     await watchlistMovie.save();
     watchlistMovies = await Watchlist.find({ user: user._id });
@@ -125,6 +124,25 @@ async function addMovieToWatchlist(req, res) {
   } catch (err) {
     console.log(err.message, " <- profile controller");
     res.status(400).json({ error: "Something went wrong" });
+  }
+}
+
+//============================================================
+
+// THIS OBVIOUSLY NEEDS TO BE REFACTORED.. PULLED FROM PUPSTAGRAM
+
+async function removeMovieFromWatchlist(req, res) {
+  try {
+    const watchList = await Watchlist.findOne({
+      "likes._id": req.params.id,
+      "likes.username": req.user.username,
+    });
+    post.likes.remove(req.params.id); // mutating a document
+    // req.params.id is the like id
+    await post.save(); // after you mutate a document you must save
+    res.json({ data: "like removed" });
+  } catch (err) {
+    res.status(400).json({ error: err });
   }
 }
 

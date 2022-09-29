@@ -41,9 +41,7 @@ const MovieDetails = ({ user, handleLogout }) => {
       setLoading(false)
       setUserProfile(profile);
     };    
-
     getUserProfile();
-
   }, []);
 
   //================================================================================
@@ -58,21 +56,16 @@ const MovieDetails = ({ user, handleLogout }) => {
     }
 
     async function addToWatchlist(movie) {
-   
       const movieInfo = {
         movieId: movie.id,
         movieTitle: movie.title,
         movieImg : `${TMDBImgUrl}${movie.poster_path}`
       }
-
-      console.log("movieInfo to add",movieInfo)
-
       try {
         const response = await MovieService.addToWatchlist(movieInfo);
         console.log(response, "from add to watchlist movieservice");
       } catch (err) {
         console.log(err, " err from server");
-        // setError("error adding like");
       }
     }
 
@@ -132,7 +125,7 @@ const MovieDetails = ({ user, handleLogout }) => {
               </li>
               <br/>
               { alreadyWatched &&
-              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="secondary">Added to your watch list!</Button>
+              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="success">Added to your watch list!</Button>
               }
               { !alreadyWatched &&
               <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="secondary">Add to your watch list</Button>
