@@ -1,41 +1,37 @@
+const User = require("../models/user");
+const Watchlist = require("../models/watchlist");
+const jwt = require("jsonwebtoken");
 
-const User = require('../models/user');
-const Watchlist = require('../models/watchlist')
-const jwt = require('jsonwebtoken');
-
-const SECRET = process.env.SECRET
+const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
   login,
   profile,
-  addMovieToWatchlist
+  addMovieToWatchlist,
 };
 
 //=============================================================
 
 async function signup(req, res) {
-  console.log('hitting signup router')
-  console.log(req.body, '<- req.body')
-    const user = new User(req.body);
+  console.log("hitting signup router");
+  console.log(req.body, "<- req.body");
+  const user = new User(req.body);
   try {
     await user.save();
     const token = createJWT(user);
     res.json({ token }); // shorthand for the below
     // res.json({ token: token })
   } catch (err) {
-
     // THIS IS AN EXAMPLE OF HOW TO HANDLE VALIDATION ERRORS FROM MONGOOSE
     if (err.name === "MongoServerError" && err.code === 11000) {
       console.log(err.message, "err.message");
-      res
-        .status(423)
-        .json({
-          errorMessage: err,
-          err: `${identifyKeyInMongooseValidationError(
-            err.message
-          )} Already taken!`,
-        });
+      res.status(423).json({
+        errorMessage: err,
+        err: `${identifyKeyInMongooseValidationError(
+          err.message
+        )} Already taken!`,
+      });
     } else {
       res.status(500).json({
         err: err,
@@ -49,21 +45,20 @@ async function signup(req, res) {
 
 async function login(req, res) {
   try {
-    const user = await User.findOne({email: req.body.email});
-    console.log(user, ' this user in login')
-    if (!user) return res.status(401).json({err: 'bad credentials'});
+    const user = await User.findOne({ email: req.body.email });
+    console.log(user, " this user in login");
+    if (!user) return res.status(401).json({ err: "bad credentials" });
     // had to update the password from req.body.pw, to req.body password
     user.comparePassword(req.body.password, (err, isMatch) => {
-        
       if (isMatch) {
         const token = createJWT(user);
-        res.json({token});
+        res.json({ token });
       } else {
-        return res.status(401).json({err: 'bad credentials'});
+        return res.status(401).json({ err: "bad credentials" });
       }
     });
   } catch (err) {
-    return res.status(401).json({err: 'error message'});
+    return res.status(401).json({ err: "error message" });
   }
 }
 
@@ -71,22 +66,17 @@ async function login(req, res) {
 
 async function profile(req, res) {
   try {
-    // find the user!
-    //const user = await User.findOne({ username: req.params.username });
-    const user = await User.findOne({email: req.user.email});
-    // if the user is undefined, that means the database couldn't find this user lets send an error back
+    // const user = await User.findOne({ email: req.user.email });
+    const user = await User.findOne({ username: req.params.username })
     if (!user) return res.status(404).json({ error: "User not found" });
-
-    // Find the Post's by the user
-    //.populate('user') <- user comes from the key on the post model 
-    //   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model < which replaces the id with the userdocument
-    const watchlistMovies = await Watchlist.find({ user: user._id }).populate("user").exec();
-
+    const watchlistMovies = await Watchlist.find({ user: user._id })
+      .populate("user")
+      .exec();
     res.status(200).json({
       data: {
         user: user,
         watchlistMovies: watchlistMovies,
-      }
+      },
     });
   } catch (err) {
     console.log(err.message, " <- profile controller");
@@ -94,42 +84,43 @@ async function profile(req, res) {
   }
 }
 
+//=================================================================================================
+
 async function addMovieToWatchlist(req, res) {
   try {
-console.log("ADD TO WATCHLIST")
-    const movieInfo = {movieId: req.query.id, movieTitle: req.query.title, movieImg: req.query.img}
-    console.log("movieInfo",movieInfo)
-    const user = await User.findOne({email: req.user.email});
-    // if the user is undefined, that means the database couldn't find this user lets send an error back
+    const movieInfo = {
+      movieId: req.query.id,
+      movieTitle: req.query.title,
+      movieImg: req.query.img,
+    };
+    console.log("movieInfo", movieInfo);
+    const user = await User.findOne({ email: req.user.email });
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    // Find the Post's by the user
-    //.populate('user') <- user comes from the key on the post model 
-    //   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model < which replaces the id with the userdocument
-    let watchlistMovies = await Watchlist.find({ user: user._id })
+    let watchlistMovies = await Watchlist.find({ user: user._id });
 
-    console.log("wm",watchlistMovies)
-    if (!!watchlistMovies.find((w => w.movieId === movieInfo.movieId))) {
+    //==== IF MOVIE ALREADY ADDED TO WATCHLIST
+    if (!!watchlistMovies.find((w) => w.movieId === movieInfo.movieId)) {
       res.status(200).json({
         data: {
           user: user,
           watchlistMovies: watchlistMovies,
-        }
+        },
       });
       return;
     }
 
-    let watch = { user: user, ...movieInfo}
-    console.log("watch",watch)
+    let watch = { user: user, ...movieInfo };
+    console.log("watch", watch);
     watchlistMovie = new Watchlist(watch);
     await watchlistMovie.save();
-    watchlistMovies = await Watchlist.find({ user: user._id })
+    watchlistMovies = await Watchlist.find({ user: user._id });
 
     res.status(200).json({
       data: {
         user: user,
         watchlistMovies: watchlistMovies,
-      }
+      },
     });
   } catch (err) {
     console.log(err.message, " <- profile controller");
@@ -143,14 +134,11 @@ console.log("ADD TO WATCHLIST")
 
 function createJWT(user) {
   return jwt.sign(
-    {user}, // data payload
+    { user }, // data payload
     SECRET,
-    {expiresIn: '24h'}
+    { expiresIn: "24h" }
   );
 }
-
-
-
 
 function identifyKeyInMongooseValidationError(err) {
   let key = err.split("dup key: {")[1].trim();

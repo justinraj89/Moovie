@@ -16,21 +16,6 @@ const fetchTrendingMovies = async (req, res) => {
   }
 };
 
-//===================================================================================
-
-const fetchPopularMovies = async (req, res) => {
-  const url = `${apiUrlPrefix}/movie/popular?api_key=${apiKey}&language=en-US&page=1`
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      const popularMovies = await response.json();
-      res.status(200).json(popularMovies);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 //====================================================================================
 
 const movieSearch = async (req, res) => {
@@ -46,6 +31,25 @@ const movieSearch = async (req, res) => {
     console.log(err);
   }
 };
+
+
+
+//==============================================================================
+
+
+const fetchPopularMovies = async (req, res) => {
+  const url = `${apiUrlPrefix}/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const popularMovies = await response.json();
+      res.status(200).json(popularMovies);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
 
 //===============================================================================
@@ -150,7 +154,6 @@ const deleteMovieRating = async (req, res) => {
 
 
 // //==============================================================================================
-
 
 
 module.exports = {

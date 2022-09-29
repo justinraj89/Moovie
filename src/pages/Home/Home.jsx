@@ -65,7 +65,7 @@ function Home({ user, handleLogout }) {
       <Container fluid="md">
         <Row>
           <Col>
-            <Carousel movies={movies}/>
+            <Carousel />
           </Col>
         </Row>
 
