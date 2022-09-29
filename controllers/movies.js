@@ -16,6 +16,21 @@ const fetchTrendingMovies = async (req, res) => {
   }
 };
 
+//===================================================================================
+
+const fetchPopularMovies = async (req, res) => {
+  const url = `${apiUrlPrefix}/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const popularMovies = await response.json();
+      res.status(200).json(popularMovies);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 //====================================================================================
 
 const movieSearch = async (req, res) => {
@@ -136,22 +151,7 @@ const deleteMovieRating = async (req, res) => {
 
 // //==============================================================================================
 
-// const getMovieBackdrops = async (req, res) => {
-//   let movieId = req.query.id;
-//   const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
-//   try {
-//     const response = await fetch(url);
-//     if (response.ok) {
-//       const images = await response.json();
-//       console.log(images.backdrops);
-//       res.status(200).json(images.backdrops);
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
-//========================================================================================================
 
 module.exports = {
   createSession,
@@ -161,6 +161,5 @@ module.exports = {
   rateMovie,
   deleteMovieRating,
   movieSearch,
-//   getMoviePosters,
-//   getMovieBackdrops,
+  fetchPopularMovies
 };

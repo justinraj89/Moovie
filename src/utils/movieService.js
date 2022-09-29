@@ -18,6 +18,21 @@ const fetchTrendingMovies = async () => {
 
 //===================================================================================
 
+const fetchPopularMovies = async () => {
+  const url = '/api/movies/popular';
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const popularMovies = await response.json();
+      return popularMovies;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//===================================================================================
+
 const movieSearch = async (search) => {
   const url = `/api/movies/search?query=${search}`;
   try {
@@ -170,24 +185,6 @@ function addToWatchlistPOST(movieInfo) {
 
 //===============================================================================================
 
-// const getMovieBackdrops = async (movieId) => {
-//     const url = `/api/movies/backdrops?id=${movieId}`;
-//     try{
-//         const response = await fetch(url);
-//         if(response.ok){
-//             const images = await response.json()
-//             console.log(images.backdrops)
-//             return images.backdrops;
-//         }
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
-
-// //==============================================================================================
-
-//========================================================================================================
 
 export default {
   createSession,
@@ -198,6 +195,5 @@ export default {
   deleteMovieRating,
   movieSearch,
   addToWatchlist,
-  // getMoviePosters,
-  // getMovieBackdrops,
+  fetchPopularMovies
 };

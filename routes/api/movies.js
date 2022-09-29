@@ -10,6 +10,7 @@ router.get('/reviews', moviesCtrl.getMovieReviews);
 router.post('/rating', moviesCtrl.rateMovie);
 router.delete('/rating', moviesCtrl.deleteMovieRating);
 router.get('/search', moviesCtrl.movieSearch);
+router.get('/popular', moviesCtrl.fetchPopularMovies)
 /*---------- Protected Routes ----------*/
 
 module.exports = router;
