@@ -5,7 +5,7 @@ const BASE_URL = '/api/users/';
 //============================================================
 
 function getProfile(username){
-  return fetch(BASE_URL + username, {
+  return fetch(BASE_URL + 'profile/' + username, {
     headers: {
       'Authorization': 'Bearer ' + tokenService.getToken()
     }

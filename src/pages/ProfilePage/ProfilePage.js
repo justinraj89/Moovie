@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 //================================================================
 
 export default function ProfilePage({ user, handleLogout }) {
+
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [profileUser, setProfileUser] = useState({});
 
@@ -26,7 +27,7 @@ export default function ProfilePage({ user, handleLogout }) {
       try {
         const data = await userService.getProfile(username);
         console.log(data, "<---DATA");
-        setProfileUser(() => data.user);
+        //setProfileUser(() => data.user);
         // setWatchlistMovies(() => [...data.watchlistMovies])
       } catch (err) {
         console.log(err);

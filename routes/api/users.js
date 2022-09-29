@@ -5,7 +5,9 @@ const usersCtrl = require('../../controllers/users');
 /*---------- Public Routes ----------*/
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
-router.get('/:username', usersCtrl.profile);
+router.get('/watchlist', usersCtrl.addMovieToWatchlist);
+router.get('/profile/:username', usersCtrl.profile);
+//router.post('/watchlist', usersCtrl.addMovieToWatchlist);
 
 
 /*---------- Protected Routes ----------*/

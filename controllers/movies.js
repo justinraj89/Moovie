@@ -1,8 +1,7 @@
-// https://developers.themoviedb.org/3/authentication/create-session
 const apiUrlPrefix = "https://api.themoviedb.org/3";
 const apiKey = process.env.APIKEY
 
-
+//===================================================================
 
 const fetchTrendingMovies = async (req, res) => {
   const url = `${apiUrlPrefix}/trending/movie/day?api_key=${apiKey}`;
@@ -134,22 +133,6 @@ const deleteMovieRating = async (req, res) => {
   }
 };
 
-//============================================================================================================
-
-// const getMoviePosters = async (req, res) => {
-//   let movieId = req.query.id;
-//   const url = `${apiUrlPrefix}/movie/${movieId}/images?api_key=d8794e2b80155359a43de192193b132f`;
-//   try {
-//     const response = await fetch(url);
-//     if (response.ok) {
-//       const images = await response.json();
-//       console.log(images.posters);
-//       res.status(200).json(images.posters);
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 // //==============================================================================================
 

@@ -1,14 +1,15 @@
+
 const User = require('../models/user');
 const Watchlist = require('../models/watchlist')
 const jwt = require('jsonwebtoken');
 
 const SECRET = process.env.SECRET
 
-
 module.exports = {
   signup,
   login,
-  profile
+  profile,
+  addMovieToWatchlist
 };
 
 //=============================================================
@@ -71,7 +72,8 @@ async function login(req, res) {
 async function profile(req, res) {
   try {
     // find the user!
-    const user = await User.findOne({ username: req.params.username });
+    //const user = await User.findOne({ username: req.params.username });
+    const user = await User.findOne({email: req.user.email});
     // if the user is undefined, that means the database couldn't find this user lets send an error back
     if (!user) return res.status(404).json({ error: "User not found" });
 
@@ -79,6 +81,50 @@ async function profile(req, res) {
     //.populate('user') <- user comes from the key on the post model 
     //   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model < which replaces the id with the userdocument
     const watchlistMovies = await Watchlist.find({ user: user._id }).populate("user").exec();
+
+    res.status(200).json({
+      data: {
+        user: user,
+        watchlistMovies: watchlistMovies,
+      }
+    });
+  } catch (err) {
+    console.log(err.message, " <- profile controller");
+    res.status(400).json({ error: "Something went wrong" });
+  }
+}
+
+async function addMovieToWatchlist(req, res) {
+  try {
+console.log("ADD TO WATCHLIST")
+    const movieInfo = {movieId: req.query.id, movieTitle: req.query.title, movieImg: req.query.img}
+    console.log("movieInfo",movieInfo)
+    const user = await User.findOne({email: req.user.email});
+    // if the user is undefined, that means the database couldn't find this user lets send an error back
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Find the Post's by the user
+    //.populate('user') <- user comes from the key on the post model 
+    //   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model < which replaces the id with the userdocument
+    let watchlistMovies = await Watchlist.find({ user: user._id })
+
+    console.log("wm",watchlistMovies)
+    if (!!watchlistMovies.find((w => w.movieId === movieInfo.movieId))) {
+      res.status(200).json({
+        data: {
+          user: user,
+          watchlistMovies: watchlistMovies,
+        }
+      });
+      return;
+    }
+
+    let watch = { user: user, ...movieInfo}
+    console.log("watch",watch)
+    watchlistMovie = new Watchlist(watch);
+    await watchlistMovie.save();
+    watchlistMovies = await Watchlist.find({ user: user._id })
+
     res.status(200).json({
       data: {
         user: user,
@@ -102,6 +148,9 @@ function createJWT(user) {
     {expiresIn: '24h'}
   );
 }
+
+
+
 
 function identifyKeyInMongooseValidationError(err) {
   let key = err.split("dup key: {")[1].trim();
