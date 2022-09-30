@@ -128,7 +128,7 @@ const MovieDetails = ({ user, handleLogout }) => {
               <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="success">Added to your watch list!</Button>
               }
               { !alreadyWatched &&
-              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="secondary">Add to your watch list</Button>
+              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="success">Add to your watch list</Button>
               }
 
             </ul>
