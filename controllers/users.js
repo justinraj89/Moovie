@@ -67,7 +67,7 @@ async function login(req, res) {
 async function profile(req, res) {
   try {
     // const user = await User.findOne({ email: req.user.email });
-    const user = await User.findOne({ username: req.params.username });
+    const user = await User.findOne({ username: req.user.username });
     if (!user) return res.status(404).json({ error: "User not found" });
     const watchlistMovies = await Watchlist.find({ user: user._id })
       .populate("user")
@@ -133,15 +133,28 @@ async function addMovieToWatchlist(req, res) {
 
 async function removeMovieFromWatchlist(req, res) {
   try {
-    const watchList = await Watchlist.findOne({
-      "likes._id": req.params.id,
-      "likes.username": req.user.username,
+
+    const user = await User.findOne({ email: req.user.email });
+    console.log("user",user)
+    
+    const movieId = req.params.id;
+    console.log("MovieId to delete",movieId)
+    const watchlistItem = await Watchlist.findOne({
+      movieId: movieId,
+      user: user._id
     });
-    post.likes.remove(req.params.id); // mutating a document
-    // req.params.id is the like id
-    await post.save(); // after you mutate a document you must save
-    res.json({ data: "like removed" });
+
+    console.log("Found watchlist?", watchlistItem)
+
+    if (!watchlistItem) {
+      const errMsg = "Watchlist item cannot be found!";
+      console.error(errMsg);
+    }
+
+    await watchlistItem.remove(); // after you mutate a document you must save
+    res.json({ data: "Watchlist item removed" });
   } catch (err) {
+    console.log(err)
     res.status(400).json({ error: err });
   }
 }

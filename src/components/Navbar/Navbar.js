@@ -22,7 +22,7 @@ const Header = ({ user, handleLogout }) => {
                 height="60"
                 className="d-inline-block align-top"
               />{" "}
-              Moovie
+              <span>Moovie</span>
             </Navbar.Brand>
           </LinkContainer>
          

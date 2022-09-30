@@ -4,97 +4,89 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
 import movieService from "../../utils/movieService";
 import Navbar from "../../components/Navbar/Navbar";
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function LoginPage({ handleSignUpOrLogin }) {
-
   //============STATE=======================
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [state, setState] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //=========FUNCTIONS==============================
 
   const handleChange = (e) => {
     setState({
       ...state,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   //--------------------------------------------------
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await userService.login(state);
       await movieService.createSession();
-      console.log("TMDB session ID", localStorage.getItem("tmdb_session_id"))
+      console.log("TMDB session ID", localStorage.getItem("tmdb_session_id"));
 
       handleSignUpOrLogin();
-      navigate('/')
-    }catch(err){
-      console.log(err)
+      navigate("/");
+    } catch (err) {
+      console.log(err);
       setError(err.message);
     }
-  }
+  };
 
   //=====================================================
 
-
   return (
     <>
-    <Navbar />
-    <div className="form-container">
-    <form onSubmit={handleSubmit} className="Auth-form">
-      <div className="Auth-form-content">
-        <h3 className="Auth-form-title">Log In</h3>
-        
-       
-        <div className="form-group mt-3">
-          <label>Email address</label>
-          <input
-            type='email'
-            name='email'
-            value={state.email}
-            onChange={handleChange}
-            className="form-control mt-1"
-            placeholder="Email Address"
-            required
-          />
-        </div>
-        <div className="form-group mt-3">
-          <label>Password</label>
-          <input
-            name= 'password'
-            type="password"
-            value={state.password}
-            onChange={handleChange}
-            className="form-control mt-1"
-            placeholder="Password"
-            required
-          />
-        </div>
-        
-        <div className="d-grid gap-2 mt-3">
-          <button type="submit" className="btn btn-secondary">
-            Submit
-          </button>
-        </div>
-      
+      <Navbar />
+      <div className="form-container">
+        <form onSubmit={handleSubmit} className="Auth-form">
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Log In</h3>
+
+            <div className="form-group mt-3">
+              <label className="formLabel">Email address</label>
+              <input
+                type="email"
+                name="email"
+                value={state.email}
+                onChange={handleChange}
+                className="form-control mt-1"
+                required
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label className="formLabel">Password</label>
+              <input
+                name="password"
+                type="password"
+                value={state.password}
+                onChange={handleChange}
+                className="form-control mt-1"
+                required
+              />
+            </div>
+
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-secondary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-  </>
+    </>
   );
 }

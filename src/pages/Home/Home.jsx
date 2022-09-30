@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,44 +8,39 @@ import Carousel from "../../components/Carousel/Carousel";
 import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import SearchForm from '../../components/SearchForm/SearchForm'
+
+const sortRandom = () => {
+  const rand = Math.floor(Math.random() * 2);
+  return rand === 0 ? -1 : 1;
+};
+//================================================
 
 function Home({ user, handleLogout }) {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   //==========================================
+  const fetchTrendingMovies = useCallback(async () => {
+    let movies = await MovieService.fetchTrendingMovies();
+    setLoading(() => false);
+    movies.results = movies.results.sort(sortRandom);
+    setMovies(movies.results);
+  }, [movies]);
 
-  useEffect(() => {
-    const fetchTrendingMovies = async () => {
-      const movies = await MovieService.fetchTrendingMovies();
-      // console.log(movies, "<-- from fetch trending movies");
-      setLoading(() => false);
-      setMovies(movies.results);
-    };
-    fetchTrendingMovies();
-  }, []);
-
-  //===================================================
+  //----------------------------------------------------------
 
   const fetchSearchMovies = async (query) => {
     const queryMovies = await MovieService.movieSearch(query);
-    console.log(queryMovies)
-    setMovies(queryMovies.results)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (search) {
-      fetchSearchMovies(search)
-      setSearch("");
-    }
+    console.log(queryMovies);
+    setMovies(queryMovies.results);
   };
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
+  //---------------------------------------
 
+  useEffect(() => {
+    fetchTrendingMovies();
+  }, []);
 
   //=======================================================
 
@@ -58,9 +53,11 @@ function Home({ user, handleLogout }) {
     );
   }
 
+  //------------------------------------------------------
+
   return (
     <>
-      <Navbar handleLogout= {handleLogout} user={user}/>
+      <Navbar handleLogout={handleLogout} user={user} />
       <br />
       <Container fluid="md">
         <Row>
@@ -68,37 +65,12 @@ function Home({ user, handleLogout }) {
             <Carousel />
           </Col>
         </Row>
-
         <br />
         <br />
         <br />
-
         <Row>
           <Col>
-            <h2>Looking for something to Watch?</h2>
-
-            <div className="searchform-container">
-              <form onSubmit={handleSubmit} className="searchAuth-form">
-                <div className="Auth-form-content">
-                  <div className="form-group mt-3">
-                    <input
-                      name="search"
-                      value={search}
-                      onChange={handleChange}
-                      className="form-control mt-1"
-                      placeholder="Search Movie Title"
-                      required
-                    />
-                  </div>
-
-                  <div className="d-grid gap-2 mt-3">
-                    <button type="submit" className="btn btn-secondary">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+            <SearchForm fetchSearchMovies={fetchSearchMovies}/>
           </Col>
         </Row>
         <br />

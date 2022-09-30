@@ -51,12 +51,6 @@ const movieSearch = async (search) => {
 const createSession = async () => {
   const url = `/api/movies/session`;
   try {
-    /*
-        const response = await fetch(url,{
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            cache: 'no-cache', // *default, no-cache, reload, force-cache,);
-        })        
-        */
     const response = await fetch(url);
 
     if (response.ok) {
@@ -187,7 +181,7 @@ function addToWatchlist(movieInfo) {
 
 function removeMovieFromWatchlist(movieInfo) {
 
-  return fetch(`/api/users/watchlist/?id=${movieInfo.movieId}&title=${movieInfo.movieTitle}&img=${movieInfo.movieImg}`, {
+  return fetch(`/api/users/watchlist/${movieInfo.movieId}`, {
     method: 'DELETE',
     headers: {
       Authorization: "Bearer " + tokenService.getToken(),

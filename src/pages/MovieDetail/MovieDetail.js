@@ -16,6 +16,7 @@ const MovieDetails = ({ user, handleLogout }) => {
   const [movieReviews, setMovieReviews] = useState()
   const [userProfile, setUserProfile] = useState("");
   const [loading, setLoading] = useState(true)
+  const [profileLoading, setProfileLoading] = useState(true)
   const [alreadyWatched, setAlreadyWatched] = useState(false)
 
   const TMDBImgUrl = "https://image.tmdb.org/t/p/w1280";
@@ -32,15 +33,17 @@ const MovieDetails = ({ user, handleLogout }) => {
       setMovie(movieDetail);
     };
     fetchMovieDetails();
+
     const getUserProfile = async () => {
       const profile = await UserService.getProfile();
       console.log(profile, "<---profile");
       if (profile.data.watchlistMovies.find(((w => w.movieId === id)))){
         setAlreadyWatched(true);
       }
-      setLoading(false)
+      setProfileLoading(false)
       setUserProfile(profile);
     };    
+
     getUserProfile();
   }, []);
 
@@ -86,7 +89,7 @@ const MovieDetails = ({ user, handleLogout }) => {
   //=================================================================================
 
 
-  if (loading) {
+  if (loading || profileLoading) {
     return (
       <>
         <Navbar handleLogout={handleLogout} user={user} />
@@ -125,7 +128,7 @@ const MovieDetails = ({ user, handleLogout }) => {
               </li>
               <br/>
               { alreadyWatched &&
-              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="success">Added to your watch list!</Button>
+              <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="danger">Added to your watch list!</Button>
               }
               { !alreadyWatched &&
               <Button disabled={alreadyWatched} onClick={handleAddToWatchlist(movie)} variant="success">Add to your watch list</Button>

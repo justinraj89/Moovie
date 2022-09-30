@@ -19,75 +19,50 @@ export default function ProfilePage({ user, handleLogout }) {
   const { username } = useParams();
 
   //=============================================================
-
-  // useEffect(() => {
-  //   async function getProfile() {
-  //     try {
-  //       const data = await userService.getProfile(username);
-  //       console.log(data, "<---DATA");
-  //       setProfileUser(() => data.user);
-  //       // setWatchlistMovies(() => [...data.watchlistMovies])
-  //       setWatchlistMovies(() => data.watchlistMovies)
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   getProfile();
-  // }, [username]);
-
-  const removeFromWatchlist = async () => {
-    try {
-      const response = await MovieService.removeMovieFromWatchlist();
-      console.log(response, "<-- response from remove Movie");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleRemoveFromWatchlist =  (movie) => {
-    return (e) => {
-      console.log('CLICK HAPPENING')
-      e.preventDefault();
-      removeFromWatchlist(movie)
-     };
-  }
-
-  //===============================================================
-
+  
   const getProfile = useCallback(async () => {
     try {
       const response = await userService.getProfile(username);
       setLoading(false);
       setProfileUser(response.data.user);
       setWatchlistMovies(response.data.watchlistMovies);
+      
     } catch (err) {
       console.log(err.message);
     }
-  }, [username]);
+  }, []);
 
   //===============================================================
 
+  const removeFromWatchlist = async (movie) => {
+    try {
+      console.log("remove movie:",movie)
+      const response = await MovieService.removeMovieFromWatchlist(movie);
+      setWatchlistMovies(watchlistMovies.filter(m => m.movieId !== movie.movieId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //==================================================================
+
+  const handleRemoveFromWatchlist =  (movie) => {
+    return (e) => {
+      console.log('CLICK HAPPENING')
+      e.preventDefault();
+      removeFromWatchlist(movie);
+      //getProfile(username)
+     };
+  }
+
+  //============================================
+
   useEffect(() => {
+    console.log("@ useEffect")
     getProfile();
-  }, [username, getProfile]);
+  }, [username]);
 
-  // useEffect(() => {
-  //   async function getProfile() {
-  //     try {
-  //       const data = await userService.getProfile(username);
-  //       console.log(data.data, "<---DATA");
-  //       setWatchlistMovies(() => [...data.data.watchlistMovies])
-  //       console.log(watchlistMovies, '<--WATCHLIST MOVIES')
-  //       setProfileUser(data.data.user);
-  //       console.log(profileUser, "<--profile user");
-  //       // setWatchlistMovies(() => [...data.watchlistMovies])
-
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   getProfile();
-  // }, [username]);
+//========================================
 
   return (
     <>
@@ -108,7 +83,7 @@ export default function ProfilePage({ user, handleLogout }) {
             <div className="movie-container">
               {watchlistMovies.length > 0 &&
                 watchlistMovies.map((movie) => (
-                  <WatchlistMovie key={movie.movieId} {...movie} handleRemoveFromWatchlist={handleRemoveFromWatchlist} />
+                  <WatchlistMovie key={movie.movieId} {...movie} handleRemoveFromWatchlist={handleRemoveFromWatchlist(movie)} />
                 ))}
             </div>
           </Col>

@@ -1,6 +1,7 @@
 .removeOverlay {
 	position: absolute;
 	color: white;
+	font-family: 'Secular One';
 	background: rgba(230, 50, 50, 1);
 	width: 100%;
 	transition: 0.5s ease;
