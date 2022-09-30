@@ -21,6 +21,7 @@ function Home({ user, handleLogout }) {
   const [loading, setLoading] = useState(true);
 
   //==========================================
+  
   const fetchTrendingMovies = useCallback(async () => {
     let movies = await MovieService.fetchTrendingMovies();
     setLoading(() => false);

@@ -19,7 +19,7 @@ export default function ProfilePage({ user, handleLogout }) {
   const { username } = useParams();
 
   //=============================================================
-  
+
   const getProfile = useCallback(async () => {
     try {
       const response = await userService.getProfile(username);
@@ -35,9 +35,11 @@ export default function ProfilePage({ user, handleLogout }) {
 
   const removeFromWatchlist = async (movie) => {
     try {
-      console.log("remove movie:",movie)
+      console.log("remove movie:", movie);
       const response = await MovieService.removeMovieFromWatchlist(movie);
-      setWatchlistMovies(watchlistMovies.filter(m => m.movieId !== movie.movieId));
+      setWatchlistMovies(
+        watchlistMovies.filter((m) => m.movieId !== movie.movieId)
+      );
     } catch (err) {
       console.log(err);
     }
@@ -45,14 +47,13 @@ export default function ProfilePage({ user, handleLogout }) {
 
   //==================================================================
 
-  const handleRemoveFromWatchlist =  (movie) => {
+  const handleRemoveFromWatchlist = (movie) => {
     return (e) => {
-      console.log('CLICK HAPPENING')
+      console.log("CLICK HAPPENING");
       e.preventDefault();
       removeFromWatchlist(movie);
-      //getProfile(username)
-     };
-  }
+    };
+  };
 
   //============================================
 
@@ -60,7 +61,7 @@ export default function ProfilePage({ user, handleLogout }) {
     getProfile();
   }, [username]);
 
-//========================================
+  //========================================
 
   return (
     <>
@@ -81,7 +82,11 @@ export default function ProfilePage({ user, handleLogout }) {
             <div className="movie-container">
               {watchlistMovies.length > 0 &&
                 watchlistMovies.map((movie) => (
-                  <WatchlistMovie key={movie.movieId} {...movie} handleRemoveFromWatchlist={handleRemoveFromWatchlist(movie)} />
+                  <WatchlistMovie
+                    key={movie.movieId}
+                    {...movie}
+                    handleRemoveFromWatchlist={handleRemoveFromWatchlist(movie)}
+                  />
                 ))}
             </div>
           </Col>
