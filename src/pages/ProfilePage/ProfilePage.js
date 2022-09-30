@@ -26,7 +26,6 @@ export default function ProfilePage({ user, handleLogout }) {
       setLoading(false);
       setProfileUser(response.data.user);
       setWatchlistMovies(response.data.watchlistMovies);
-      
     } catch (err) {
       console.log(err.message);
     }
@@ -58,7 +57,6 @@ export default function ProfilePage({ user, handleLogout }) {
   //============================================
 
   useEffect(() => {
-    console.log("@ useEffect")
     getProfile();
   }, [username]);
 
