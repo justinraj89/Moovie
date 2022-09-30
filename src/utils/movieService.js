@@ -48,22 +48,6 @@ const movieSearch = async (search) => {
 
 //===============================================================================
 
-const createSession = async () => {
-  const url = `/api/movies/session`;
-  try {
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const json = await response.json();
-      localStorage.setItem("tmdb_session_id", json.guest_session_id);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//====================================================================================
-
 const getMovieDetails = async (movieId) => {
   const url = `/api/movies/details?id=${movieId}`;
   try {
@@ -98,52 +82,6 @@ const getMovieReviews = async (movieId) => {
 };
 
 //======================================================================================================
-
-const rateMovie = async (movieId, rating) => {
-  const guestSessionId = localStorage.getItem("tmdb_session_id");
-  const url = `/api/movies/rating?id=${movieId}&rating=${rating}`;
-  try {
-    const data = { value: Number.parseInt(rating) };
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache,);
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      const json = await response.json();
-      localStorage.setItem("tmdb_session_id", json.guest_session_id);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//=======================================================================================================
-
-const deleteMovieRating = async (movieId) => {
-  const url = `/api/movies/rating?id=${movieId}`;
-  const guestSessionId = localStorage.getItem("tmdb_session_id");
-
-  try {
-    const data = {};
-    const response = await fetch(url, {
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache,);
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      const json = await response.json();
-      localStorage.setItem("tmdb_session_id", json.guest_session_id);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//===========================================================================================
-//==================ADD TO WATCH LIST ==================================================
 
 function addToWatchlist(movieInfo) {
 
@@ -196,12 +134,9 @@ function removeMovieFromWatchlist(movieInfo) {
 
 
 export default {
-  createSession,
   fetchTrendingMovies,
   getMovieDetails,
   getMovieReviews,
-  rateMovie,
-  deleteMovieRating,
   movieSearch,
   addToWatchlist,
   fetchPopularMovies,

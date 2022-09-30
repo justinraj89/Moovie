@@ -129,8 +129,6 @@ async function addMovieToWatchlist(req, res) {
 
 //============================================================
 
-// THIS OBVIOUSLY NEEDS TO BE REFACTORED.. PULLED FROM PUPSTAGRAM
-
 async function removeMovieFromWatchlist(req, res) {
   try {
 
@@ -151,7 +149,7 @@ async function removeMovieFromWatchlist(req, res) {
       console.error(errMsg);
     }
 
-    await watchlistItem.remove(); // after you mutate a document you must save
+    await watchlistItem.remove(); 
     res.json({ data: "Watchlist item removed" });
   } catch (err) {
     console.log(err)
