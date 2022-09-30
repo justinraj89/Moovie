@@ -49,8 +49,6 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
 
     try {
       await userService.signup(state);
-      await movieService.createSession();
-      console.log("TMDB session ID", localStorage.getItem("tmdb_session_id"));
       handleSignUpOrLogin();
       navigate("/");
     } catch (err) {
