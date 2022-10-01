@@ -13,6 +13,7 @@ const sortRandom = () => {
 //==========================================================
 
 export default function MovieCarousel() {
+
   const [popularMovies, setPopularMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +50,7 @@ export default function MovieCarousel() {
   }
 
   //===================================================
+  
 
   return <Carousel>{carouselItems}</Carousel>;
 }

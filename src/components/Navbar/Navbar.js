@@ -25,8 +25,6 @@ const Header = ({ user, handleLogout }) => {
               <span>Moovie</span>
             </Navbar.Brand>
           </LinkContainer>
-         
-
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -38,15 +36,11 @@ const Header = ({ user, handleLogout }) => {
               <LinkContainer to='/' onClick={handleLogout}>
                 <Nav.Link className="navLinks">Log Out</Nav.Link>
               </LinkContainer>
-      
-              
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
-      
-      
     )
   }
   return (

@@ -1,6 +1,8 @@
 const apiUrlPrefix = "https://api.themoviedb.org/3";
 const apiKey = process.env.APIKEY
 
+
+//---------------- TMDB API CALLS-----------------------------------
 //===================================================================
 
 const fetchTrendingMovies = async (req, res) => {
@@ -32,10 +34,7 @@ const movieSearch = async (req, res) => {
   }
 };
 
-
-
 //==============================================================================
-
 
 const fetchPopularMovies = async (req, res) => {
   const url = `${apiUrlPrefix}/movie/popular?api_key=${apiKey}&language=en-US&page=1`
@@ -44,23 +43,6 @@ const fetchPopularMovies = async (req, res) => {
     if (response.ok) {
       const popularMovies = await response.json();
       res.status(200).json(popularMovies);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
-
-//===============================================================================
-
-const createSession = async (req, res) => {
-  const url = `${apiUrlPrefix}/authentication/guest_session/new?api_key=${apiKey}`;
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      const json = await response.json();
-      res.status(200).json(json)
     }
   } catch (err) {
     console.log(err);
@@ -104,65 +86,13 @@ const getMovieReviews = async (req, res) => {
   }
 };
 
-//======================================================================================================
-
-const rateMovie = async (req, res) => {
-  let movieId = req.query.id;
-  let rating = req.query.rating;
-  const guestSessionId = localStorage.getItem("tmdb_session_id");
-  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=${apiKey}&guest_session_id=${guestSessionId}`;
-  try {
-    const data = { value: Number.parseInt(rating) };
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache,);
-      body: JSON.stringify(req.body),
-    });
-
-    if (response.ok) {
-      const json = await response.json();
-      localStorage.setItem("tmdb_session_id", json.guest_session_id);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 //=======================================================================================================
-
-const deleteMovieRating = async (req, res) => {
-  let movieId = req.query.id;
-  const url = `${apiUrlPrefix}/movie/${movieId}/rating?api_key=${apiKey}&guest_session_id=${guestSessionId}`;
-  const guestSessionId = localStorage.getItem("tmdb_session_id");
-
-  try {
-    const data = {};
-    const response = await fetch(url, {
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache,);
-      body: JSON.stringify(req.body),
-    });
-
-    if (response.ok) {
-      const json = await response.json();
-      localStorage.setItem("tmdb_session_id", json.guest_session_id);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
-// //==============================================================================================
 
 
 module.exports = {
-  createSession,
   fetchTrendingMovies,
   getMovieDetails,
   getMovieReviews,
-  rateMovie,
-  deleteMovieRating,
   movieSearch,
   fetchPopularMovies
 };

@@ -48,7 +48,6 @@ async function login(req, res) {
     const user = await User.findOne({ email: req.body.email });
     console.log(user, " this user in login");
     if (!user) return res.status(401).json({ err: "bad credentials" });
-    // had to update the password from req.body.pw, to req.body password
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
@@ -66,7 +65,6 @@ async function login(req, res) {
 
 async function profile(req, res) {
   try {
-    // const user = await User.findOne({ email: req.user.email });
     const user = await User.findOne({ username: req.user.username });
     if (!user) return res.status(404).json({ error: "User not found" });
     const watchlistMovies = await Watchlist.find({ user: user._id })
@@ -141,8 +139,6 @@ async function removeMovieFromWatchlist(req, res) {
       movieId: movieId,
       user: user._id
     });
-
-    console.log("Found watchlist?", watchlistItem)
 
     if (!watchlistItem) {
       const errMsg = "Watchlist item cannot be found!";

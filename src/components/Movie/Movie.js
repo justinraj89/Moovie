@@ -5,8 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 //============================================================
 
 const Movie = (props) => {
-  // console.log(props, '<-- movie component props')
-
+  
   const TMDBImgUrl = "https://image.tmdb.org/t/p/w1280";
 
   let linkUrl = "/movie-details/";

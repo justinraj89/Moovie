@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const SearchForm = ({ fetchSearchMovies }) => {
+  
   const [search, setSearch] = useState("");
 
   const handleSubmit = (e) => {

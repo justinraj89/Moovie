@@ -23,29 +23,34 @@ function App() {
   }
 
   if (user) {
+    //IF USER IS LOGGED IN
+    return (
+      <Routes>
+        <Route
+          path="/"
+          element={<Home handleLogout={handleLogout} user={user} />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
+          path="/signup"
+          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
+          path="/movie-details/:id"
+          element={<MovieDetail handleLogout={handleLogout} user={user} />}
+        />
+        <Route
+          path="/:username"
+          element={<ProfilePage handleLogout={handleLogout} user={user} />}
+        />
+      </Routes>
+    );
+  }
 
-  //IF USER IS LOGGED IN
-  return (
-    <Routes>
-      <Route path="/" element={<Home handleLogout={handleLogout} user={user}/>} />
-      <Route
-        path="/login"
-        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-      />
-      <Route
-        path="/signup"
-        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-      />
-
-      <Route path="/movie-details/:id" element={<MovieDetail handleLogout={handleLogout} user={user} />} />
-
-      <Route path="/:username" element={<ProfilePage handleLogout={handleLogout} user={user} />} />
-
-    </Routes>
-  );
-}
-
-// // IF USER IS NOT LOGGED IN
+  // // IF USER IS NOT LOGGED IN
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -60,6 +65,6 @@ function App() {
       <Route path="/*" element={<Navigate to="/login" />} />
     </Routes>
   );
-  }
+}
 
 export default App;

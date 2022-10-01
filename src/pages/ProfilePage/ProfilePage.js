@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Navbar from "../../components/Navbar/Navbar";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import WatchlistMovie from "../../components/WatchlistMovie/WatchlistMovie";
 import userService from "../../utils/userService";
 import { useParams } from "react-router-dom";
@@ -35,7 +36,6 @@ export default function ProfilePage({ user, handleLogout }) {
 
   const removeFromWatchlist = async (movie) => {
     try {
-      console.log("remove movie:", movie);
       const response = await MovieService.removeMovieFromWatchlist(movie);
       setWatchlistMovies(
         watchlistMovies.filter((m) => m.movieId !== movie.movieId)
@@ -62,6 +62,15 @@ export default function ProfilePage({ user, handleLogout }) {
   }, [username]);
 
   //========================================
+
+  if (loading) {
+    return (
+      <>
+        <Navbar handleLogout={handleLogout} user={user} />
+        <LoadingSpinner />
+      </>
+    );
+  }
 
   return (
     <>

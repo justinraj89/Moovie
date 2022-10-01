@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+console.log('TEST LOG BEFORE MONGO CONNECT')
+
 mongoose.connect(
   process.env.DATABASE_URL  
 
