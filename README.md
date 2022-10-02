@@ -1,7 +1,7 @@
 # Moovie
 
 ![moovielogo](https://i.imgur.com/fwDSUCM.png)
-#### Moovie is an application where users can Sign up, login, and build a watchlist of movies that they want to watch. Users may also remove moveies from their watchlist. Use the search form to search for specific movie titles!
+## Moovie is an application where users can Sign up, login, and build a watchlist of movies that they want to watch. Users may also remove movies from their watchlist. Use the search form to search for specific movie titles!
 
 Movie info obtained via The Movie Database API (TMDB)
 
@@ -54,4 +54,5 @@ Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
 - Allow users to add reviews/rate movies specific movie titles.
 - Build in Pagination.
 - Use pop up Modal for Movie details page.
+- Upgrade Carousel to display Movie Title overlay, and Link movies to their details page.
 
