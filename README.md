@@ -39,6 +39,7 @@ Movie info obtained via The Movie Database API (TMDB)
 - Express
 - React
 - TMDB API
+- Bootstrap
 
 ## Getting Started
 
