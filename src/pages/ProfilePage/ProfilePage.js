@@ -88,15 +88,19 @@ export default function ProfilePage({ user, handleLogout }) {
         <br />
         <Row>
           <Col>
-            <div className="movie-container">
-              {watchlistMovies.length > 0 &&
+          <div className="movie-container">
+              {watchlistMovies.length === 0 ? (
+                <div className="no-movies">No Movies in Watchlist</div>
+              ) : (
+                watchlistMovies.length > 0 &&
                 watchlistMovies.map((movie) => (
                   <WatchlistMovie
                     key={movie.movieId}
                     {...movie}
                     handleRemoveFromWatchlist={handleRemoveFromWatchlist(movie)}
                   />
-                ))}
+                ))
+              )}
             </div>
           </Col>
         </Row>

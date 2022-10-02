@@ -22,7 +22,7 @@ const Header = ({ user, handleLogout }) => {
                 height="60"
                 className="d-inline-block align-top"
               />{" "}
-              <span>Moovie</span>
+              <span className="moovie">Moovie</span>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -48,14 +48,14 @@ const Header = ({ user, handleLogout }) => {
       <Navbar sticky='top' collapseOnSelect expand="lg" bg="black" variant="dark">
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand className='logoFont' href="#home">
+            <Navbar.Brand className='logoFont'>
               <img
                 alt=""
                 src="https://i.imgur.com/eNExTFg.png"
-                width="60"
-                height="60"
+                width="55"
+                height="55"
                 className="d-inline-block align-top"
-              />{" "}
+              />
               Moovie
             </Navbar.Brand>
           </LinkContainer>

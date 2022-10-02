@@ -14,3 +14,26 @@
     font-size: 35px;
     color: rgb(98, 98, 223);
 }
+
+@media only screen and (max-width: 600px) {
+
+    .detailsImg {
+        width: 328px;
+        margin: 0 auto;
+    }
+
+    .movieInfoTitles {
+        font-weight: 700;
+        font-size: 25px;
+        color: rgb(98, 98, 223);
+    }
+
+    .movieInfo {
+        color: white;
+        list-style: none;
+        font-size: 20px;
+        font-family: 'Secular One';
+    }
+
+
+  }
