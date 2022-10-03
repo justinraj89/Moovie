@@ -1,4 +1,5 @@
 const apiUrlPrefix = "https://api.themoviedb.org/3";
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const apiKey = process.env.APIKEY
 
 
