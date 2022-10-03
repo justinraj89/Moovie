@@ -69,30 +69,12 @@ const getMovieDetails = async (req, res) => {
 
 //===============================================================================================
 
-const getMovieReviews = async (req, res) => {
-  let movieId = req.query.id;
-  const url = `${apiUrlPrefix}/movie/${movieId}/reviews?api_key=${apiKey}`;
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      const reviewsData = await response.json();
-      // reviewsData can have multiple pages of data
-      // reviewsData.results contains the review data
-      console.log(reviewsData);
-      res.status(200).json(reviewsData);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
 
-//=======================================================================================================
 
 
 module.exports = {
   fetchTrendingMovies,
   getMovieDetails,
-  getMovieReviews,
   movieSearch,
   fetchPopularMovies
 };

@@ -99,22 +99,6 @@ function addToWatchlist(movieInfo) {
 }
 
 
-// function addToWatchlistPOST(movieInfo) {
-
-//   return fetch(`/api/users/watchlist`, {
-//     method: "POST",
-//     body: JSON.stringify(movieInfo),
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: "Bearer " + tokenService.getToken(), // This grabs thee JWT token out
-//       // local storage and send its in the header to the server
-//     },
-//   }).then((res) => {
-//     if (res.ok) return res.json();
-//     throw new Error(res.error);
-//   });
-// }
-
 //==========================REMOVE FROM WATCHLIST==============================================
 
 function removeMovieFromWatchlist(movieInfo) {
