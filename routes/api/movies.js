@@ -7,7 +7,7 @@ router.get('/trending', moviesCtrl.fetchTrendingMovies);
 router.get('/details', moviesCtrl.getMovieDetails);
 router.get('/search', moviesCtrl.movieSearch);
 router.get('/popular', moviesCtrl.fetchPopularMovies);
-console.log('asdfas')
+
 /*---------- Protected Routes ----------*/
 
 module.exports = router;
