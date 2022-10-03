@@ -1,5 +1,6 @@
 require('dotenv').config();
-const fetch = require("node-fetch");
+import fetch from 'node-fetch'
+
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
