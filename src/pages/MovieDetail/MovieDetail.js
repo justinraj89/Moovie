@@ -27,14 +27,12 @@ const MovieDetails = ({ user, handleLogout }) => {
     const fetchMovieDetails = async () => {
       const movieDetail = await MovieService.getMovieDetails(id);
       setLoading(false);
-      console.log(movieDetail, "<---MOVIE DETAILS");
       setMovie(movieDetail);
     };
     fetchMovieDetails();
 
     const getUserProfile = async () => {
       const profile = await UserService.getProfile();
-      console.log(profile, "<---profile");
       if (profile.data.watchlistMovies.find((w) => w.movieId === id)) {
         setAlreadyWatched(true);
       }
@@ -73,7 +71,7 @@ const MovieDetails = ({ user, handleLogout }) => {
 
   //=================================================================================
 
-  if (loading || profileLoading) {
+  if (loading) {
     return (
       <>
         <Navbar handleLogout={handleLogout} user={user} />
@@ -81,6 +79,8 @@ const MovieDetails = ({ user, handleLogout }) => {
       </>
     );
   }
+
+  
 
   return (
     <>
@@ -115,7 +115,7 @@ const MovieDetails = ({ user, handleLogout }) => {
                 {movie.release_date}
               </li>
               <br />
-              {alreadyWatched && (
+              { user && alreadyWatched && (
                 <Button
                   disabled={alreadyWatched}
                   onClick={handleAddToWatchlist(movie)}
@@ -124,7 +124,7 @@ const MovieDetails = ({ user, handleLogout }) => {
                   Added to your watch list!
                 </Button>
               )}
-              {!alreadyWatched && (
+              { user && !alreadyWatched && (
                 <Button
                   disabled={alreadyWatched}
                   onClick={handleAddToWatchlist(movie)}

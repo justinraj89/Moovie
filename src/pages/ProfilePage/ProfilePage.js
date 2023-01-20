@@ -49,7 +49,6 @@ export default function ProfilePage({ user, handleLogout }) {
 
   const handleRemoveFromWatchlist = (movie) => {
     return (e) => {
-      console.log("CLICK HAPPENING");
       e.preventDefault();
       removeFromWatchlist(movie);
     };

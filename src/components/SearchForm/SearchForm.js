@@ -22,13 +22,14 @@ const SearchForm = ({ fetchSearchMovies }) => {
 
   return (
     <>
-      <h2>Looking for something to Watch?</h2>
+      {/* <h2>Looking for something to Watch?</h2> */}
       <div className="searchform-container">
         <form className="searchAuth-form">
           <div className="Auth-form-content">
             <div className="form-group mt-3"></div>
             <input
               type="text"
+              placeholder="Search Movies"
               onChange={handleChange}
               className="form-control mt-1"
               value={search}

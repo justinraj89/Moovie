@@ -1,14 +1,43 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-console.log('TEST LOG BEFORE MONGO CONNECT')
+// export the function that creates a database connection
+module.exports = {
+  connectDB,
+};
 
-mongoose.connect(
-  process.env.DATABASE_URL  
+async function connectDB() {
+  try {
+    const conn = await mongoose.connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
 
-const db = mongoose.connection;
+  } catch (err) {
+    console.log("err");
+    console.log(err, ' connecting to mongodb')
+    process.exit(1);
+  }
+}
 
-db.on('connected', function() {
-  console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
-});
+
+
+
+
+
+
+// const mongoose = require('mongoose');
+
+// console.log('TEST LOG BEFORE MONGO CONNECT')
+
+// mongoose.connect(
+//   process.env.DATABASE_URL  
+
+// );
+
+// const db = mongoose.connection;
+
+// db.on('connected', function() {
+//   console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
+// });

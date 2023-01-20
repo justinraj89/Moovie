@@ -14,3 +14,9 @@ h2 {
   padding-bottom: 20px;
   border-radius: 8px;
 }
+
+.load_more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 45px;
+}

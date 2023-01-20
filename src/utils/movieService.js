@@ -3,8 +3,8 @@ const BASE_URL = "/api/movies/";
 
 //=====================================
 
-const fetchTrendingMovies = async () => {
-  const url = `/api/movies/trending`;
+const fetchTrendingMovies = async (page) => {
+  const url = `/api/movies/trending?page=${page}`;
   try {
     const response = await fetch(url);
     if (response.ok) {
@@ -117,6 +117,8 @@ function removeMovieFromWatchlist(movieInfo) {
 //===============================================================================================
 
 
+
+
 export default {
   fetchTrendingMovies,
   getMovieDetails,
@@ -124,5 +126,6 @@ export default {
   movieSearch,
   addToWatchlist,
   fetchPopularMovies,
-  removeMovieFromWatchlist
+  removeMovieFromWatchlist,
+
 };

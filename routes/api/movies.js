@@ -8,6 +8,8 @@ router.get('/details', moviesCtrl.getMovieDetails);
 router.get('/search', moviesCtrl.movieSearch);
 router.get('/popular', moviesCtrl.fetchPopularMovies);
 
+// router.get('/loadMore', moviesCtrl.loadMoreMovies)
+
 /*---------- Protected Routes ----------*/
 
 module.exports = router;

@@ -62,6 +62,10 @@ function App() {
         path="/signup"
         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
+      <Route
+        path="/movie-details/:id"
+        element={<MovieDetail handleLogout={handleLogout} user={user} />}
+      />
       <Route path="/*" element={<Navigate to="/login" />} />
     </Routes>
   );

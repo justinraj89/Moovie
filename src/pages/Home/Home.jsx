@@ -8,39 +8,69 @@ import Carousel from "../../components/Carousel/Carousel";
 import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import SearchForm from '../../components/SearchForm/SearchForm'
+import SearchForm from "../../components/SearchForm/SearchForm";
+//==============================================================
 
-const sortRandom = () => {
-  const rand = Math.floor(Math.random() * 2);
-  return rand === 0 ? -1 : 1;
-};
-//================================================
+//--------------------
 
 function Home({ user, handleLogout }) {
+  
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  //==========================================
-  
-  const fetchTrendingMovies = useCallback(async () => {
-    let movies = await MovieService.fetchTrendingMovies();
+  const loadMoreMovies = () => {
+    setCurrentPage((page) => page + 1);
+  };
+
+  const fetchTrendingMovies = async () => {
+    let movies = await MovieService.fetchTrendingMovies(currentPage);
+    console.log(movies);
     setLoading(() => false);
-    movies.results = movies.results.sort(sortRandom);
-    setMovies(movies.results);
-  }, [movies]);
+    setMovies((prev) =>
+      currentPage === 1 ? movies.results : [...prev, ...movies.results]
+    );
+  };
 
   //----------------------------------------------------------
 
   const fetchSearchMovies = async (query) => {
     const queryMovies = await MovieService.movieSearch(query);
-    console.log(queryMovies);
     setMovies(queryMovies.results);
+    setCurrentPage(1)
   };
 
   //---------------------------------------
 
   useEffect(() => {
     fetchTrendingMovies();
+  }, [currentPage]);
+
+
+  const handleScroll = () => {
+    const windowHeight =
+      "innerHeight" in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight - 1) {
+      loadMoreMovies();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    // cleanup function
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   //=======================================================
@@ -71,7 +101,7 @@ function Home({ user, handleLogout }) {
         <br />
         <Row>
           <Col>
-            <SearchForm fetchSearchMovies={fetchSearchMovies}/>
+            <SearchForm fetchSearchMovies={fetchSearchMovies} />
           </Col>
         </Row>
         <br />
@@ -86,9 +116,11 @@ function Home({ user, handleLogout }) {
             </div>
           </Col>
         </Row>
+        <br/>
+        <br/>
       </Container>
     </>
   );
 }
 
-export default Home;
+export default Home;      
