@@ -1,83 +1,79 @@
-import React, { useState } from "react";
 import "./LoginPage.css";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
-import movieService from "../../utils/movieService";
 import NavbarNoSearch from '../../components/NavbarNoSearch/NavbarNoSearch';
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { showToast } from "../../utils/tools";
+import { Alert } from "react-bootstrap";
+//==================================================
+
 
 export default function LoginPage({ handleSignUpOrLogin }) {
-  //============STATE=======================
-
-  const [error, setError] = useState("");
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
 
   const navigate = useNavigate();
 
-  //=========FUNCTIONS==============================
+  const formik = useFormik({
+    initialValues: { email: "", password: '' },
+    validationSchema: Yup.object({
+      email: Yup.string().required("Please enter your email"),
+      password: Yup.string().required("Please enter a password"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        await userService.login(values);
+        handleSignUpOrLogin()
+        navigate("/");
+        showToast('SUCCESS', 'Welcome back!')
+      } catch (err) {
+        console.log(err);
+        showToast('ERROR', 'Incorrect login information')
+      }
+    },
+  });
 
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
+
 
   //--------------------------------------------------
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await userService.login(state);
-      handleSignUpOrLogin();
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-      setError(err.message);
-    }
-  };
 
-  //=====================================================
 
   return (
     <>
-      <NavbarNoSearch />
-      <div className="form-container">
-        <form onSubmit={handleSubmit} className="Auth-form">
+    <NavbarNoSearch />
+       <div className="form-container">
+        <form onSubmit={formik.handleSubmit} className="Auth-form">
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Log In</h3>
 
             <div className="form-group mt-3">
-              <label className="formLabel">Email address</label>
+              <label className="formLabel">Email</label>
               <input
                 type="email"
                 name="email"
-                value={state.email}
-                onChange={handleChange}
                 className="form-control mt-1"
-                required
+                {...formik.getFieldProps("email")}
               />
-            </div>
-            <div className="form-group mt-3">
-              <label className="formLabel">Password</label>
-              <input
-                name="password"
-                type="password"
-                value={state.password}
-                onChange={handleChange}
-                className="form-control mt-1"
-                required
-              />
+              {formik.errors.email && formik.touched.email ? (
+                <Alert variant="danger">{formik.errors.email}</Alert>
+              ) : null}
             </div>
 
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-secondary">
+            <div className="form-group mt-3">
+            <label className="formLabel">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control mt-1"
+                {...formik.getFieldProps("password")}
+              />
+              {formik.errors.password && formik.touched.password ? (
+                <Alert variant="danger">{formik.errors.password}</Alert>
+              ) : null}
+            </div>
+
+            <div className="d-grid gap-2 mt-4">
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
