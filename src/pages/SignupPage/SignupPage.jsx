@@ -4,7 +4,7 @@ import "./SignupPage.css";
 import userService from "../../utils/userService";
 import movieService from "../../utils/movieService";
 import { Navigate, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+import NavbarNoSearch from '../../components/NavbarNoSearch/NavbarNoSearch';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -61,7 +61,7 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
 
   return (
     <>
-      <Navbar />
+      <NavbarNoSearch />
       <div className="form-container">
         <form onSubmit={handleSubmit} className="Auth-form">
           <div className="Auth-form-content">

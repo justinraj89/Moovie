@@ -41,7 +41,8 @@ const fetchTrendingMovies = async (req, res) => {
 
 const movieSearch = async (req, res) => {
   const search = req.query.query
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}`;
+  const page = req.query.page
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}&page=${page}`;
   try {
     const response = await fetch(url);
     if (response.ok) {

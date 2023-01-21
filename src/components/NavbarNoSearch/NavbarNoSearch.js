@@ -5,23 +5,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
-import "./Navbar.css";
+import "./NavbarNoSearch.css";
 //=========================================================
 
-const Header = ({ user, handleLogout, handleSearch }) => {
-  const [searchCriteria, setSearchCriteria] = useState("");
-
-  const handleChange = (e) => {
-    setSearchCriteria(e.target.value);
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log('handle search submit')
-    if (searchCriteria) {
-      handleSearch(searchCriteria);
-    }
-  };
+const HeaderNoSearch = ({ user, handleLogout, handleSearch }) => {
 
   useEffect(() => {
     console.log("re-render");
@@ -54,17 +41,6 @@ const Header = ({ user, handleLogout, handleSearch }) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Form className="d-flex" onSubmit={handleSearchSubmit}>
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                    value={searchCriteria}
-                    onChange={handleChange}
-                  />
-                  <Button variant="outline-info">Search</Button>
-                </Form>
               </Nav>
 
               <Nav>
@@ -108,17 +84,7 @@ const Header = ({ user, handleLogout, handleSearch }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Form className="d-flex" onSubmit={handleSearchSubmit}>
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                  value={searchCriteria}
-                  onChange={handleChange}
-                />
-                <Button variant="outline-info" onClick={handleSearchSubmit}>Search</Button>
-              </Form>
+              
             </Nav>
             <Nav>
               <LinkContainer to="/login">
@@ -135,5 +101,4 @@ const Header = ({ user, handleLogout, handleSearch }) => {
   );
 };
 
-export default Header;
-
+export default HeaderNoSearch;

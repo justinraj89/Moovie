@@ -1,52 +1,56 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
-import Carousel from "../../components/Carousel/Carousel";
 import MovieService from "../../utils/movieService";
 import Movie from "../../components/Movie/Movie";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import SearchForm from "../../components/SearchForm/SearchForm";
 //==============================================================
 
-//--------------------
-
 function Home({ user, handleLogout }) {
-  
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [search, setSearch] = useState("");
+//----------------------------------------------
   const loadMoreMovies = () => {
     setCurrentPage((page) => page + 1);
   };
-
+  //----------------------------------------------
   const fetchTrendingMovies = async () => {
     let movies = await MovieService.fetchTrendingMovies(currentPage);
-    console.log(movies);
     setLoading(() => false);
     setMovies((prev) =>
       currentPage === 1 ? movies.results : [...prev, ...movies.results]
     );
   };
-
   //----------------------------------------------------------
-
   const fetchSearchMovies = async (query) => {
-    const queryMovies = await MovieService.movieSearch(query);
-    setMovies(queryMovies.results);
-    setCurrentPage(1)
+    const queryMovies = await MovieService.movieSearch(query, currentPage);
+    setMovies((prev) =>
+      currentPage === 1
+        ? queryMovies.results
+        : [...prev, ...queryMovies.results]
+    );
   };
-
+  //---------------------------------------
+  const handleSearch = (criteria) => {
+    console.log("SEARCH CRITERIA",criteria)
+    if (criteria) {
+      setSearch(criteria);
+      fetchSearchMovies(criteria);
+      setCurrentPage(1);
+      }
+  };
   //---------------------------------------
 
   useEffect(() => {
-    fetchTrendingMovies();
-  }, [currentPage]);
+    search === '' ? fetchTrendingMovies() : fetchSearchMovies(search);
+  }, [currentPage, search]);
 
-
+  //--------------------------------
   const handleScroll = () => {
     const windowHeight =
       "innerHeight" in window
@@ -61,6 +65,7 @@ function Home({ user, handleLogout }) {
       html.scrollHeight,
       html.offsetHeight
     );
+    
     const windowBottom = windowHeight + window.pageYOffset;
     if (windowBottom >= docHeight - 1) {
       loadMoreMovies();
@@ -78,7 +83,7 @@ function Home({ user, handleLogout }) {
   if (loading) {
     return (
       <>
-        <Navbar handleLogout={handleLogout} user={user} />
+        <Navbar handleSearch={handleSearch} handleLogout={handleLogout} user={user} />
         <LoadingSpinner />
       </>
     );
@@ -88,39 +93,27 @@ function Home({ user, handleLogout }) {
 
   return (
     <>
-      <Navbar handleLogout={handleLogout} user={user} />
-      <br />
-      <Container fluid="md">
-        <Row>
-          <Col>
-            <Carousel />
-          </Col>
-        </Row>
-        <br />
-        <br />
-        <br />
-        <Row>
-          <Col>
-            <SearchForm fetchSearchMovies={fetchSearchMovies} />
-          </Col>
-        </Row>
-        <br />
-        <br />
-        <br />
-        <br />
+      <Navbar
+        handleLogout={handleLogout}
+        user={user}        
+        handleSearch={handleSearch}
+        search={search}
+      />
+      <Container>
         <Row>
           <Col>
             <div className="movie-container">
               {movies.length > 0 &&
                 movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+                {movies.length === 0 && <div>No movies found. Please try again.</div>}
             </div>
           </Col>
         </Row>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </Container>
     </>
   );
 }
 
-export default Home;      
+export default Home;

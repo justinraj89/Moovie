@@ -2,21 +2,11 @@ h2 {
   color: white;
 }
 
-.searchform-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchAuth-form {
-  width: 500px;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  border-radius: 8px;
-}
-
 .load_more {
   display: flex;
   justify-content: center;
   margin-bottom: 45px;
 }
+
+
+

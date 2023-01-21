@@ -33,8 +33,8 @@ const fetchPopularMovies = async () => {
 
 //===================================================================================
 
-const movieSearch = async (search) => {
-  const url = `/api/movies/search?query=${search}`;
+const movieSearch = async (search,page) => {
+  const url = `/api/movies/search?query=${search}&page=${page}`;
   try {
     const response = await fetch(url);
     if (response.ok) {

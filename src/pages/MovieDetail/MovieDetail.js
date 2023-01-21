@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Movie from "../../components/Movie/Movie";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Navbar from "../../components/Navbar/Navbar";
+import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch"
 import UserService from "../../utils/userService";
 import MovieService from "../../utils/movieService";
 import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+//===================================================
 
 const MovieDetails = ({ user, handleLogout }) => {
   const [movie, setMovie] = useState("");
@@ -22,7 +22,6 @@ const MovieDetails = ({ user, handleLogout }) => {
   const { id } = useParams();
 
   //==============================================================================
-
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const movieDetail = await MovieService.getMovieDetails(id);
@@ -39,12 +38,10 @@ const MovieDetails = ({ user, handleLogout }) => {
       setProfileLoading(false);
       setUserProfile(profile);
     };
-
     getUserProfile();
   }, []);
 
   //================================================================================
-
   const handleAddToWatchlist = (movie) => {
     return (e) => {
       e.preventDefault();
@@ -52,7 +49,6 @@ const MovieDetails = ({ user, handleLogout }) => {
       setAlreadyWatched(true);
     };
   };
-
   //============================================================================
 
   async function addToWatchlist(movie) {
@@ -74,20 +70,16 @@ const MovieDetails = ({ user, handleLogout }) => {
   if (loading) {
     return (
       <>
-        <Navbar handleLogout={handleLogout} user={user} />
+        <NavbarNoSearch handleLogout={handleLogout} user={user} />
         <LoadingSpinner />
       </>
     );
   }
 
-  
-
   return (
     <>
-      <Navbar handleLogout={handleLogout} user={user} />
+      <NavbarNoSearch handleLogout={handleLogout} user={user} />
       <Container>
-        <br />
-        <br />
         <br />
         <br />
         <Row>
@@ -101,7 +93,7 @@ const MovieDetails = ({ user, handleLogout }) => {
           <Col>
             <ul>
               <li className="movieInfo">
-                <span className="movieInfoTitles">TITLE: </span>
+                <span className="movieInfoTitles">TITLE:</span>
                 {movie.title}
               </li>
               <br />
@@ -115,7 +107,7 @@ const MovieDetails = ({ user, handleLogout }) => {
                 {movie.release_date}
               </li>
               <br />
-              { user && alreadyWatched && (
+              {user && alreadyWatched && (
                 <Button
                   disabled={alreadyWatched}
                   onClick={handleAddToWatchlist(movie)}
@@ -124,7 +116,7 @@ const MovieDetails = ({ user, handleLogout }) => {
                   Added to your watch list!
                 </Button>
               )}
-              { user && !alreadyWatched && (
+              {user && !alreadyWatched && (
                 <Button
                   disabled={alreadyWatched}
                   onClick={handleAddToWatchlist(movie)}

@@ -1,0 +1,19 @@
+.logoFont {
+    font-family: 'Luckiest Guy';
+    font-size: 35px;
+    
+}
+
+.navLinks {
+    font-size: 22px;
+    font-family: 'Secular One';
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .logoFont {
+        font-family: 'Luckiest Guy';
+        font-size: 25px;
+    }
+  }
