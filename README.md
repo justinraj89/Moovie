@@ -1,39 +1,57 @@
-## Setup 
+# Moovie
 
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv mern-boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+![moovielogo](https://i.imgur.com/fwDSUCM.png)
+## Moovie is an application where users can Sign up, login, and build a watchlist of movies that they want to watch. Users may also remove movies from their watchlist. Use the search form to search for specific movie titles!
+
+Movie info obtained via The Movie Database API (TMDB)
 
 
-#### Setup your git repo
+## Screenshots
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
 
-it should look like this
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin master
-```
+### Home Page Carousel
+![HomePage](https://i.imgur.com/Y7v0nRd.jpg)
 
-#### Setup the App
+### Home Page Weekly Trending Movies/search form
+![HomePage2](https://i.imgur.com/NwgdgHj.png)
 
-```npm install```
+### Search for Batman!
+![ViewPost](https://i.imgur.com/pwd4I94.jpg)
 
-*DOTENV*
+### Movie Details Page
+![Moviedetail](https://i.imgur.com/BUFPdmR.png)
 
-`touch .env`
+### Profile/Watchlist Page
+![Watchlist](https://i.imgur.com/cDDyVoa.png)
 
-add your variables
+### Sign-Up Form
+![Signup](https://i.imgur.com/jcDqUBF.png)
 
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
+### Wire Frame 
+![WireFrame](https://i.imgur.com/GBlUNAj.png)
 
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+## Technologies Used
+
+- Node.js
+- MongoDB
+- Mongoose
+- Express
+- React
+- TMDB API
+- Bootstrap
+
+## Getting Started
+
+Link to [Trello Board](https://trello.com/b/6UZMdcRC/project-4) here.
+
+Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
+
+
+## Next Steps
+
+- Create drop down menu to allow users to search for movies based on Genre.
+- Allow users to add reviews/rate movies specific movie titles.
+- Build in Pagination.
+- Use pop up Modal for Movie details page.
+- Upgrade Carousel to display Movie Title overlay, and Link movies to their details page.
