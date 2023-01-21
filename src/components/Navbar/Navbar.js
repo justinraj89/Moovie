@@ -63,7 +63,7 @@ const Header = ({ user, handleLogout, handleSearch }) => {
                     value={searchCriteria}
                     onChange={handleChange}
                   />
-                  <Button variant="outline-info">Search</Button>
+                  <Button variant="outline-info" onClick={handleSearchSubmit}>Search</Button>
                 </Form>
               </Nav>
 

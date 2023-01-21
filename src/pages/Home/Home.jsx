@@ -105,7 +105,7 @@ function Home({ user, handleLogout }) {
             <div className="movie-container">
               {movies.length > 0 &&
                 movies.map((movie) => <Movie key={movie.id} {...movie} />)}
-                {movies.length === 0 && <div>No movies found. Please try again.</div>}
+                {movies.length === 0 && <div>No Movies found.</div>}
             </div>
           </Col>
         </Row>
