@@ -2,17 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 200px;    
+  margin-top: 50px;    
 }
 
 .Auth-form {
   width: 500px;
   padding-top: 30px;
   padding-bottom: 20px;
-  border-radius: 8px;
-  background: #ECE9E6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  
 }
 
 .formLabel {
@@ -29,7 +27,7 @@
   text-align: center;
   margin-bottom: 1em;
   font-size: 24px;
-  color: purple;
+  color: red;
   font-weight: 800;
   font-family: 'Secular One';
 }
@@ -37,7 +35,7 @@
 label {
   font-size: 14px;
   font-weight: 600;
-  color: purple;
+  color: red;
 }
 
 btn {
