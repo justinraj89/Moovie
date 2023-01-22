@@ -43,3 +43,20 @@
 }
 
 
+@media only screen and (max-width: 600px) {
+
+  .movie {
+    border-radius: 3px;
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+    width: 500px;
+    transition: transform 300ms ease 100ms;
+  }
+
+
+
+
+
+}
+

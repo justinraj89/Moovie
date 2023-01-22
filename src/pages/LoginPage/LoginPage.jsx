@@ -32,8 +32,6 @@ export default function LoginPage({ handleSignUpOrLogin }) {
     },
   });
 
-
-
   //--------------------------------------------------
 
 
