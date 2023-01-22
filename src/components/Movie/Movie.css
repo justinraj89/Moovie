@@ -56,7 +56,7 @@
   }
 
   .movie:hover {
-    transform: scale(0.8) !important;
+    transform: scale(1.1) !important;
     cursor: pointer;
   }
 
