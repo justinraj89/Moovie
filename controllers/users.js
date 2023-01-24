@@ -14,7 +14,6 @@ module.exports = {
 //=============================================================
 
 async function signup(req, res) {
-  console.log("hitting signup router");
   console.log(req.body, "<- req.body");
   const user = new User(req.body);
   try {
@@ -109,7 +108,7 @@ async function addMovieToWatchlist(req, res) {
     }
 
     let watch = { user: user, ...movieInfo };
-    watchlistMovie = new Watchlist(watch);
+    let watchlistMovie = new Watchlist(watch);
     await watchlistMovie.save();
     watchlistMovies = await Watchlist.find({ user: user._id });
 

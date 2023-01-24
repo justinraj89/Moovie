@@ -33,6 +33,7 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
         showToast('SUCCESS', 'Welcome to Moovie! Thank you for signing up!')
       } catch (err) {
         console.log(err);
+        showToast('ERROR', err.message)
       }
     },
   });

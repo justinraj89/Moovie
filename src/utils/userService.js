@@ -28,11 +28,8 @@ function signup(user) {
   .then(res => {
     if (res.ok) return res.json();
     // Probably a duplicate email
-    
     // Writing your error handling like this allows you to throw the error response 
     // to the catch block where signup occurs,  
-
-//  res.status(400).json({ err: "Something went wrong" }); notice err, and response.err match
     return res.json().then(response => {
       console.log(response)
       throw new Error(response.err)
@@ -77,6 +74,8 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
+
+
 //============================================================
 
 
@@ -85,5 +84,5 @@ export default {
   logout,
   login,
   getUser,
-  getProfile
+  getProfile,
 };

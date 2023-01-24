@@ -20,23 +20,6 @@ const fetchTrendingMovies = async (req, res) => {
   }
 };
 
-//============ TEST PAGINATION
-
-// const loadMoreMovies = async (req, res) => {
-//   const page = req.query.page;
-//   console.log(req.query, 'from controller')
-//   const url = `${apiUrlPrefix}/trending/movie/day?api_key=${apiKey}&page=${page}`;
-//   try {
-//     const response = await fetch(url);
-//     if (response.ok) {
-//       const loadMore = await response.json();
-//       res.status(200).json(loadMore)
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 //====================================================================================
 
 const movieSearch = async (req, res) => {
