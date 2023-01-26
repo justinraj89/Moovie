@@ -10,8 +10,7 @@ Movie info obtained via The Movie Database API (TMDB)
 
 
 
-### Home Page Carousel
-![HomePage](https://i.imgur.com/Y7v0nRd.jpg)
+
 
 ### Home Page Weekly Trending Movies/search form
 ![HomePage2](https://i.imgur.com/NwgdgHj.png)
