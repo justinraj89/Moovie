@@ -9,13 +9,7 @@ Movie info obtained via The Movie Database API (TMDB)
 ## Screenshots
 
 ### Home Page
-![HomePage](https://i.imgur.com/GSH7PNg.jpg)
-
-### Home Page Weekly Trending Movies/search form
-![HomePage2](https://i.imgur.com/NwgdgHj.png)
-
-### Search for Batman!
-![ViewPost](https://i.imgur.com/pwd4I94.jpg)
+<img src="https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif" width="100" height="100">
 
 ### Movie Details Page
 ![Moviedetail](https://i.imgur.com/BUFPdmR.png)
