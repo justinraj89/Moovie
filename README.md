@@ -9,7 +9,7 @@ Movie info obtained via The Movie Database API (TMDB)
 ## Screenshots
 
 ### Home Page
-![HomePage](https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif)
+![HomePage](https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif | width=100 )
 
 ### Home Page Weekly Trending Movies/search form
 ![HomePage2](https://i.imgur.com/NwgdgHj.png)
