@@ -9,7 +9,7 @@ Movie info obtained via The Movie Database API (TMDB)
 ## Screenshots
 
 ### Home Page
-<img src="https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif" width="100" height="100">
+<img src="https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif" width="800" >
 
 ### Movie Details Page
 ![Moviedetail](https://i.imgur.com/BUFPdmR.png)
