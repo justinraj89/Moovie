@@ -5,6 +5,8 @@
 
 Movie info obtained via The Movie Database API (TMDB)
 
+Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
+
 
 ## Screenshots
 
@@ -32,18 +34,14 @@ Movie info obtained via The Movie Database API (TMDB)
 - React
 - TMDB API
 - Bootstrap
+- Formik
+- React-Toastify
 
-## Getting Started
+## Trello Board
 
 Link to [Trello Board](https://trello.com/b/6UZMdcRC/project-4) here.
 
-Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
 
 
-## Next Steps
 
-- Create drop down menu to allow users to search for movies based on Genre.
-- Allow users to add reviews/rate movies specific movie titles.
-- Build in Pagination.
-- Use pop up Modal for Movie details page.
-- Upgrade Carousel to display Movie Title overlay, and Link movies to their details page.
+
