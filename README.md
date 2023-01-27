@@ -18,7 +18,7 @@ Movie info obtained via The Movie Database API (TMDB)
 ![Watchlist](https://i.imgur.com/cDDyVoa.png)
 
 ### Sign-Up Form
-![Signup](https://i.imgur.com/jcDqUBF.png)
+![Signup](https://i.imgur.com/41YBMac.png)
 
 ### Wire Frame 
 ![WireFrame](https://i.imgur.com/GBlUNAj.png)
