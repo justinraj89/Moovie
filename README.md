@@ -11,7 +11,7 @@ Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
 ## Screenshots
 
 ### Home Page
-<img src="https://media.giphy.com/media/puE8mn9rgK7UAR1E61/giphy.gif" width="800" >
+
 
 ### Movie Details Page
 ![Moviedetail](https://i.imgur.com/BUFPdmR.png)
@@ -21,6 +21,10 @@ Link to deployed Application [here](https://m00vieapp.herokuapp.com/)
 
 ### Sign-Up Form
 ![Signup](https://i.imgur.com/41YBMac.png)
+
+## Mobile-View
+<img src="https://media.giphy.com/media/4Tzvm9MHlLK16e3GSh/giphy.gif" width="400" >
+
 
 ### Wire Frame 
 ![WireFrame](https://i.imgur.com/GBlUNAj.png)
