@@ -32,10 +32,6 @@ app.get("/*", function (req, res) {
 
 const port = process.env.PORT || 3001;
 
-// app.listen(port, function() {
-//   console.log(`Express app listening on port ${port}`);
-// });
-
 connectDB().then(() => {
   app.listen(port);
   console.log(`Express app listening on port ${port}`);

@@ -37,7 +37,6 @@ function Home({ user, handleLogout }) {
   };
   //---------------------------------------
   const handleSearch = (criteria) => {
-    console.log("SEARCH CRITERIA",criteria)
     if (criteria) {
       setSearch(criteria);
       fetchSearchMovies(criteria);

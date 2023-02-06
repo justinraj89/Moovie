@@ -19,7 +19,7 @@ module.exports = function(req, res, next) {
       }
     });
   } else {
-    // not token
+    // no token
     req.user = null;
     next();
   }
