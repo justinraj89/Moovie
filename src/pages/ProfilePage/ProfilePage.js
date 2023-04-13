@@ -4,7 +4,7 @@ import MovieService from "../../utils/movieService";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Navbar from "../../components/Navbar/Navbar";
+import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import WatchlistMovie from "../../components/WatchlistMovie/WatchlistMovie";
 import userService from "../../utils/userService";
@@ -65,7 +65,7 @@ export default function ProfilePage({ user, handleLogout }) {
   if (loading) {
     return (
       <>
-        <Navbar handleLogout={handleLogout} user={user} />
+        <NavbarNoSearch handleLogout={handleLogout} user={user} />
         <LoadingSpinner />
       </>
     );
@@ -73,7 +73,7 @@ export default function ProfilePage({ user, handleLogout }) {
 
   return (
     <>
-      <Navbar handleLogout={handleLogout} user={user} />
+      <NavbarNoSearch handleLogout={handleLogout} user={user} />
       <br />
       <Container fluid="md">
         <Row>
