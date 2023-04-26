@@ -12,6 +12,10 @@ html {
   overflow-y: scroll;
 }
 
+html, body{
+  padding: 0 !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
