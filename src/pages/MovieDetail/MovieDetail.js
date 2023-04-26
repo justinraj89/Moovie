@@ -82,17 +82,16 @@ const MovieDetails = ({ user, handleLogout }) => {
     <>
       <NavbarNoSearch handleLogout={handleLogout} user={user} />
       <Container>
-        <br />
-        <br />
+        <br/>
         <Row>
-          <Col>
+          <Col className="img-column">
             <img
               className="detailsImg"
               src={TMDBImgUrl + movie.poster_path}
               alt={movie.title}
             ></img>
           </Col>
-          <Col>
+          <Col className="info-column">
             <ul>
               <li className="movieInfo">
                 <span className="movieInfoTitles">TITLE: </span>
