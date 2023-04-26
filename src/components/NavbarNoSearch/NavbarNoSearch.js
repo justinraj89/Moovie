@@ -6,14 +6,21 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import "./NavbarNoSearch.css";
+import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
 //=========================================================
 
-const HeaderNoSearch = ({ user, handleLogout, handleSearch }) => {
+const HeaderNoSearch = ({ user, handleLogout }) => {
 
-  useEffect(() => {
-    console.log("re-render");
-    //console.log("SearchText", searchText)
-  }, []);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirmLogout = () => {
+    handleLogout();
+    handleCloseModal();
+  };
 
   if (user) {
     return (
@@ -49,13 +56,18 @@ const HeaderNoSearch = ({ user, handleLogout, handleSearch }) => {
                     {user.username}'s Watchlist
                   </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/" onClick={handleLogout}>
+                <button onClick={() => setShowModal(true)} className='logout-btn'>
                   <Nav.Link className="navLinks">Log Out</Nav.Link>
-                </LinkContainer>
+                </button>
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <ConfirmLogoutModal
+          handleConfirmLogout={handleConfirmLogout}
+          showModal={showModal}
+          handleCloseModal={handleCloseModal}
+        />
       </>
     );
   }

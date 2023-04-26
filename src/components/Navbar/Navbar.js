@@ -6,27 +6,34 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import "./Navbar.css";
+import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
 //=========================================================
 
 const Header = ({ user, handleLogout, handleSearch }) => {
   const [searchCriteria, setSearchCriteria] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     setSearchCriteria(e.target.value);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirmLogout = () => {
+    handleLogout();
+    handleCloseModal();
+  };
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log('handle search submit')
+    console.log("handle search submit");
     if (searchCriteria) {
       handleSearch(searchCriteria);
     }
   };
 
-  useEffect(() => {
-    console.log("re-render");
-    //console.log("SearchText", searchText)
-  }, []);
 
   if (user) {
     return (
@@ -63,7 +70,9 @@ const Header = ({ user, handleLogout, handleSearch }) => {
                     value={searchCriteria}
                     onChange={handleChange}
                   />
-                  <Button variant="outline-info" onClick={handleSearchSubmit}>Search</Button>
+                  <Button variant="outline-info" onClick={handleSearchSubmit}>
+                    Search
+                  </Button>
                 </Form>
               </Nav>
 
@@ -73,13 +82,18 @@ const Header = ({ user, handleLogout, handleSearch }) => {
                     {user.username}'s Watchlist
                   </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/" onClick={handleLogout}>
+                <LinkContainer to="/" onClick={() => setShowModal(true)}>
                   <Nav.Link className="navLinks">Log Out</Nav.Link>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <ConfirmLogoutModal
+          handleConfirmLogout={handleConfirmLogout}
+          showModal={showModal}
+          handleCloseModal={handleCloseModal}
+        />
       </>
     );
   }
@@ -117,7 +131,9 @@ const Header = ({ user, handleLogout, handleSearch }) => {
                   value={searchCriteria}
                   onChange={handleChange}
                 />
-                <Button variant="outline-info" onClick={handleSearchSubmit}>Search</Button>
+                <Button variant="outline-info" onClick={handleSearchSubmit}>
+                  Search
+                </Button>
               </Form>
             </Nav>
             <Nav>
@@ -136,4 +152,3 @@ const Header = ({ user, handleLogout, handleSearch }) => {
 };
 
 export default Header;
-
