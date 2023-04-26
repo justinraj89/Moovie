@@ -15,6 +15,12 @@
     color: rgb(98, 98, 223);
 }
 
+.login-to-add {
+    font-family: 'Secular One';
+    color: white;
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .detailsImg {
@@ -26,6 +32,7 @@
         font-weight: 700;
         font-size: 25px;
         color: rgb(98, 98, 223);
+        
     }
 
     .movieInfo {
@@ -33,6 +40,7 @@
         list-style: none;
         font-size: 20px;
         font-family: 'Secular One';
+        padding-top: 8px;
     }
 
 

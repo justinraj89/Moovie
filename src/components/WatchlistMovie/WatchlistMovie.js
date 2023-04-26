@@ -8,8 +8,6 @@ const WatchListMovie = (props) => {
   let linkUrl = "/movie-details/";
   let movieId = props.movieId;
 
-  //==========================================================
-
   return (
     <>
       <div className="movie image-container">

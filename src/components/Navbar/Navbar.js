@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -28,12 +28,10 @@ const Header = ({ user, handleLogout, handleSearch }) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("handle search submit");
     if (searchCriteria) {
       handleSearch(searchCriteria);
     }
   };
-
 
   if (user) {
     return (

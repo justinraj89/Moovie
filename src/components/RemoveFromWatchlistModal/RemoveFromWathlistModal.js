@@ -2,9 +2,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./RemoveFromWatchlistModal.css";
 import { CloseButton } from "react-bootstrap";
+//============================================
 
 function RemoveFromWathlistModal({ showModal, handleCloseModal, handleConfirmRemove, movieToRemove}) {
-    console.log(movieToRemove)
+
   return (
     <Modal show={showModal} onHide={handleCloseModal} centered className="remove-modal">
     <Modal.Header className="modal-title">

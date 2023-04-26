@@ -1,12 +1,9 @@
 import React from "react";
 import "./Movie.css";
 import { LinkContainer } from "react-router-bootstrap";
-import { Container } from "react-bootstrap";
-
 //============================================================
 
 const Movie = (props) => {
-  
   const TMDBImgUrl = "https://image.tmdb.org/t/p/w1280";
 
   let linkUrl = "/movie-details/";
@@ -17,7 +14,11 @@ const Movie = (props) => {
   return (
     <div className="movie image-container">
       <LinkContainer to={linkUrl + movieId}>
-        <img className='poster-path' src={TMDBImgUrl + props.poster_path} alt={props.title}></img>
+        <img
+          className="poster-path"
+          src={TMDBImgUrl + props.poster_path}
+          alt={props.title}
+        ></img>
       </LinkContainer>
       <LinkContainer to={linkUrl + movieId}>
         <div className="overlay d-flex align-items-center justify-content-center">

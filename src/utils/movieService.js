@@ -1,6 +1,4 @@
 import tokenService from './tokenService'
-const BASE_URL = "/api/movies/";
-
 //=====================================
 
 const fetchTrendingMovies = async (page) => {

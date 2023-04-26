@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch"
+import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch";
 import UserService from "../../utils/userService";
 import MovieService from "../../utils/movieService";
 import "./MovieDetail.css";
@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { showToast } from "../../utils/tools";
+import { Link } from "react-router-dom";
 //===================================================
 
 const MovieDetails = ({ user, handleLogout }) => {
@@ -47,7 +48,7 @@ const MovieDetails = ({ user, handleLogout }) => {
     return (e) => {
       e.preventDefault();
       addToWatchlist(movie);
-      showToast('SUCCESS', 'Movie added to your watchlist!')
+      showToast("SUCCESS", "Movie added to your watchlist!");
       setAlreadyWatched(true);
     };
   };
@@ -61,7 +62,6 @@ const MovieDetails = ({ user, handleLogout }) => {
     };
     try {
       const response = await MovieService.addToWatchlist(movieInfo);
-      console.log(response, "from add to watchlist movieservice");
     } catch (err) {
       console.log(err, " err from server");
     }
@@ -95,7 +95,7 @@ const MovieDetails = ({ user, handleLogout }) => {
           <Col>
             <ul>
               <li className="movieInfo">
-                <span className="movieInfoTitles">TITLE:</span>
+                <span className="movieInfoTitles">TITLE: </span>
                 {movie.title}
               </li>
               <br />
@@ -126,6 +126,14 @@ const MovieDetails = ({ user, handleLogout }) => {
                 >
                   Add to your watch list
                 </Button>
+              )}
+              {!user && (
+                <p className="login-to-add">
+                  <span>
+                    <Link to="/login">Login</Link>
+                  </span>{" "}
+                  to add this movie to your watchlist!
+                </p>
               )}
             </ul>
           </Col>

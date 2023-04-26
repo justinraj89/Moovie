@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import "./SignupPage.css";
 import userService from "../../utils/userService";
-import movieService from "../../utils/movieService";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch";
 //--------------------------------------------------
 import { useFormik } from "formik";

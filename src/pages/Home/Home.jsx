@@ -14,7 +14,7 @@ function Home({ user, handleLogout }) {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-//----------------------------------------------
+  //----------------------------------------------
   const loadMoreMovies = () => {
     setCurrentPage((page) => page + 1);
   };
@@ -41,12 +41,12 @@ function Home({ user, handleLogout }) {
       setSearch(criteria);
       fetchSearchMovies(criteria);
       setCurrentPage(1);
-      }
+    }
   };
   //---------------------------------------
 
   useEffect(() => {
-    search === '' ? fetchTrendingMovies() : fetchSearchMovies(search);
+    search === "" ? fetchTrendingMovies() : fetchSearchMovies(search);
   }, [currentPage, search]);
 
   //--------------------------------
@@ -64,7 +64,7 @@ function Home({ user, handleLogout }) {
       html.scrollHeight,
       html.offsetHeight
     );
-    
+
     const windowBottom = windowHeight + window.pageYOffset;
     if (windowBottom >= docHeight - 1) {
       loadMoreMovies();
@@ -82,7 +82,11 @@ function Home({ user, handleLogout }) {
   if (loading) {
     return (
       <>
-        <Navbar handleSearch={handleSearch} handleLogout={handleLogout} user={user} />
+        <Navbar
+          handleSearch={handleSearch}
+          handleLogout={handleLogout}
+          user={user}
+        />
         <LoadingSpinner />
       </>
     );
@@ -94,7 +98,7 @@ function Home({ user, handleLogout }) {
     <>
       <Navbar
         handleLogout={handleLogout}
-        user={user}        
+        user={user}
         handleSearch={handleSearch}
         search={search}
       />
@@ -104,7 +108,7 @@ function Home({ user, handleLogout }) {
             <div className="movie-container">
               {movies.length > 0 &&
                 movies.map((movie) => <Movie key={movie.id} {...movie} />)}
-                {movies.length === 0 && <div>No Movies found.</div>}
+              {movies.length === 0 && <div>No Movies found.</div>}
             </div>
           </Col>
         </Row>

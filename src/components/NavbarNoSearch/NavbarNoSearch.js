@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import "./NavbarNoSearch.css";
 import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
