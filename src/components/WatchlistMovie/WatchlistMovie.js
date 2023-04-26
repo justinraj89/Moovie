@@ -1,12 +1,10 @@
-import React from "react";
 import "./WatchlistMovie.css";
 import { LinkContainer } from "react-router-bootstrap";
-import Button from "react-bootstrap/Button";
 import "./WatchlistMovie.css";
-
 //============================================================
 
 const WatchListMovie = (props) => {
+
   let linkUrl = "/movie-details/";
   let movieId = props.movieId;
 

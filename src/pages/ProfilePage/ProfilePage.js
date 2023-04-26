@@ -4,18 +4,20 @@ import MovieService from "../../utils/movieService";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch"
+import NavbarNoSearch from "../../components/NavbarNoSearch/NavbarNoSearch";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import WatchlistMovie from "../../components/WatchlistMovie/WatchlistMovie";
 import userService from "../../utils/userService";
 import { useParams } from "react-router-dom";
-
+import RemoveFromWathlistModal from "../../components/RemoveFromWatchlistModal/RemoveFromWathlistModal";
 //================================================================
 
 export default function ProfilePage({ user, handleLogout }) {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [profileUser, setProfileUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [movieToRemove, setMovieToRemove] = useState(null);
 
   const { username } = useParams();
 
@@ -50,8 +52,19 @@ export default function ProfilePage({ user, handleLogout }) {
   const handleRemoveFromWatchlist = (movie) => {
     return (e) => {
       e.preventDefault();
-      removeFromWatchlist(movie);
+      setShowModal(true);
+      setMovieToRemove(movie);
     };
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setMovieToRemove(null);
+  };
+
+  const handleConfirmRemove = () => {
+    removeFromWatchlist(movieToRemove);
+    handleCloseModal();
   };
 
   //============================================
@@ -87,7 +100,7 @@ export default function ProfilePage({ user, handleLogout }) {
         <br />
         <Row>
           <Col>
-          <div className="movie-container">
+            <div className="movie-container">
               {watchlistMovies.length === 0 ? (
                 <div className="no-movies">No Movies in Watchlist</div>
               ) : (
@@ -104,6 +117,12 @@ export default function ProfilePage({ user, handleLogout }) {
           </Col>
         </Row>
       </Container>
+      <RemoveFromWathlistModal
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        handleConfirmRemove={handleConfirmRemove}
+        movieToRemove={movieToRemove}
+      />
     </>
   );
 }
