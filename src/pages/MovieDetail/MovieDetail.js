@@ -9,6 +9,7 @@ import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { showToast } from "../../utils/tools";
 //===================================================
 
 const MovieDetails = ({ user, handleLogout }) => {
@@ -46,6 +47,7 @@ const MovieDetails = ({ user, handleLogout }) => {
     return (e) => {
       e.preventDefault();
       addToWatchlist(movie);
+      showToast('SUCCESS', 'Movie added to your watchlist!')
       setAlreadyWatched(true);
     };
   };
