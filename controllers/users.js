@@ -90,7 +90,6 @@ async function addMovieToWatchlist(req, res) {
       movieTitle: req.query.title,
       movieImg: req.query.img,
     };
-    console.log("movieInfo", movieInfo);
     const user = await User.findOne({ email: req.user.email });
     if (!user) return res.status(404).json({ error: "User not found" });
 
