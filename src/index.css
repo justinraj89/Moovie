@@ -5,15 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  
-  /* background: #F3904F;  
-  background: -webkit-linear-gradient(to right, #3B4371, #F3904F);  
-  background: linear-gradient(to right, #3B4371, #F3904F);  */
-
   background-color: black;
+}
 
-
+html {
+  overflow-y: scroll;
 }
 
 code {
