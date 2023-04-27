@@ -10,6 +10,7 @@ import WatchlistMovie from "../../components/WatchlistMovie/WatchlistMovie";
 import userService from "../../utils/userService";
 import { useParams } from "react-router-dom";
 import RemoveFromWathlistModal from "../../components/RemoveFromWatchlistModal/RemoveFromWathlistModal";
+import { showToast } from "../../utils/tools";
 //================================================================
 
 export default function ProfilePage({ user, handleLogout }) {
@@ -42,6 +43,7 @@ export default function ProfilePage({ user, handleLogout }) {
       setWatchlistMovies(
         watchlistMovies.filter((m) => m.movieId !== movie.movieId)
       );
+      showToast("SUCCESS", "Movie removed from your watchlist");
     } catch (err) {
       console.log(err);
     }
