@@ -13,5 +13,9 @@
 }
 
 .image-container:hover .removeOverlay {
-	opacity: 1;
+	opacity: .95;
+}
+
+.removeOverlay:hover {
+	background: rgb(181, 21, 21);
 }

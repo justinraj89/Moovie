@@ -91,8 +91,6 @@ export default function ProfilePage({ user, handleLogout }) {
       <Container fluid="md">
         <Row>
           <Col>
-            <br />
-            <br />
             <h1 className="username">{profileUser.username}'s Watchlist </h1>
           </Col>
         </Row>
